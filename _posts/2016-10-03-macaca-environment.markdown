@@ -79,6 +79,7 @@ npm ERR!     /Users/mac/npm-debug.log
 
 ```
 出现上面报错时候可以进行下面操作
+
 ```xml
 mac:~ mac$ sudo mkdir -p /usr/local/lib/node_modules/cnpm
 mac:~ mac$ sudo chown -R mac /usr/local/lib/node_modules/
