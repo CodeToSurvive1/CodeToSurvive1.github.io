@@ -94,11 +94,13 @@ npm install macaca-cli -g
 ```
 
 2.如果需要测试安卓设备
+
 ```xml
 cnpm install macaca-android -g
 ```
 
 3.测试浏览器需要
+
 ```xml
 cnpm install macaca-chrome -g
 ```
@@ -106,16 +108,19 @@ cnpm install macaca-chrome -g
 4.测试ios设备需要安装
 
 * 首先需要安装homebrew
+
 ```xml
 mac:~ mac$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
 * 安装ios代理
+
 ```xml
 brew install ios-webkit-debug-proxy
 ```
 
 * 安装IOS驱动
+
 ```xml
 cnpm install macaca-ios -g
 ```
