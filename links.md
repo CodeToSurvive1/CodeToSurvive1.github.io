@@ -24,18 +24,3 @@ tags: [链接,友情,交换]
   Stack Overflow
 </a>
 </li>
-<li>
-<a href="http://developer.android.com/">
-  Android Developer
-</a>
-</li>
-<li>
-<a href="http://blog.jobbole.com/">
-  Jobbole
-</a>
-</li>
-<li>
-<a href="http://99u.com/">
-  99U
-</a>
-</li>
