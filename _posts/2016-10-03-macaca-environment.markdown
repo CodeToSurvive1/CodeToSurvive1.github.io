@@ -23,28 +23,31 @@ tags: [macaca,nodejs]
 2.设置JAVA环境变量
 
 ```xml
-mac:~ mac$ sudo vi /etc/profile 
+mac:~ mac$ sudo vi /etc/profile
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home
 export CLASS_PATH=$JAVA_HOME/lib
 export PATH=$PATH:$JAVA_HOME/bin:$CLASS_PATH
 
-mac:~ mac$ source /etc/profile 
+mac:~ mac$ source /etc/profile
 ```
 3.[下载Android sdk](https://dl.google.com/android/android-sdk_r24.4.1-macosx.zip),解压后进入tools目录下，打开Android程序出现下面截图，勾选并进行安装
 
 ![](../assets/14754873177417.jpg)
 
 4.安装完成后，配置android环境变量
+
 ```xml
 export ANDROID_HOME=/Users/mac/software/android-sdk-macosx
 export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
-mac:~ mac$ source /etc/profile 
+mac:~ mac$ source /etc/profile
 ```
+
 5.安装nodejs,一路下一步
 ![](../assets/14754875638447.jpg)
 
 6.安装cnpm国内镜像
+
 ```xml
 mac:~ mac$ npm install -g cnpm --registry=https://registry.npm.taobao.org
 npm ERR! Darwin 15.6.0
@@ -62,7 +65,7 @@ npm ERR!   errno: -13,
 npm ERR!   code: 'EACCES',
 npm ERR!   syscall: 'rmdir',
 npm ERR!   path: '/usr/local/lib/node_modules/cnpm' }
-npm ERR! 
+npm ERR!
 npm ERR! Please try running this command again as root/Administrator.
 npm ERR! error rolling back Error: EACCES: permission denied, rmdir '/usr/local/lib/node_modules/cnpm'
 npm ERR! error rolling back     at Error (native)
@@ -81,44 +84,57 @@ mac:~ mac$ sudo mkdir -p /usr/local/lib/node_modules/cnpm
 mac:~ mac$ sudo chown -R mac /usr/local/lib/node_modules/
 mac:~ mac$ sudo chown -R mac /usr/local/bin/
 ```
+
 ### macaca相关软件安装
+
 1.安装macaca服务端程序
 
 ```xml
 npm install macaca-cli -g
 ```
+
 2.如果需要测试安卓设备
 ```xml
 cnpm install macaca-android -g
 ```
+
 3.测试浏览器需要
 ```xml
 cnpm install macaca-chrome -g
 ```
+
 4.测试ios设备需要安装
+
 * 首先需要安装homebrew
 ```xml
 mac:~ mac$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
+
 * 安装ios代理
 ```xml
 brew install ios-webkit-debug-proxy
 ```
+
 * 安装IOS驱动
 ```xml
 cnpm install macaca-ios -g
 ```
+
 5.测试电脑端需要安装
+
 ```xml
 cnpm install macaca-electron -g
 ```
+
 6.如果想通过页面审查设备元素，可以安装app-inspector
+
 ```xml
 cnpm install app-inspector -g
 ```
 ![审查页面截图](../assets/14754890192127.jpg)
 
 7.检查环境是否成功
+
 ```xml
 mac:~ mac$ macaca doctor
   macaca-doctor version: 1.0.19
@@ -142,7 +158,9 @@ mac:~ mac$ macaca doctor
   electron: 1.1.2
   ios: 1.0.37
 ```
+
 8.打开xcode->proferences找到下面的accounts,并登陆开发者账号
+
 ![登录开发者帐号](../assets/14755022998321.jpg)
 
 ![下载所有证书](../assets/14755023121490.jpg)
@@ -172,6 +190,3 @@ mac:macaca-test-sample mac$ idevice_id -l
 mac:macaca-test-sample mac$ inspector -u 9daef85429600e88ea5442ba3d5fee548c02aeac --verbose
 
 ```
-
-
-
