@@ -196,3 +196,10 @@ mac:macaca-test-sample mac$ idevice_id -l
 mac:macaca-test-sample mac$ inspector -u 9daef85429600e88ea5442ba3d5fee548c02aeac --verbose
 
 ```
+
+<!-- 多说评论框 start -->
+
+```html
+<div class="ds-thread" data-thread-key="1AE9C937-9795-4D15-B446-BD9C530FFF8E" data-title="macaca环境搭建" data-url="https://codetosurvive1.github.io/posts/macaca-environment.html"></div>
+```
+<!-- 多说评论框 end -->

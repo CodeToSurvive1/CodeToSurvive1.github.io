@@ -98,3 +98,7 @@ git clone https://github.com/CodeToSurvive1/xiaomi_forum_spider.git
 cd xiaomi_forum_spider
 scrapy crawl xiaomi-theme
 ```
+
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="1AE9C937-9795-4D15-B446-BD9C530FFF8E" data-title="macaca环境搭建" data-url="https://codetosurvive1.github.io/posts/macaca-environment.html"></div>
+<!-- 多说评论框 end -->

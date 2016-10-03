@@ -15,6 +15,5 @@ title: "问答：Faqs"
 Git分支管理策略: <http://www.ruanyifeng.com/blog/2012/07/git.html>    
 Git查看、删除、重命名远程分支和tag: http://zengrong.net/post/1746.htm  
 4,Google无障碍浏览链接：<https://github.com/greatfire/wiki>  
-5,在线Android等源码：<http://www.grepcode.com/>, <http://androidxref.com/>  
 6,Twitter University: <http://www.bluemobi.cn/>  
 更多请看本文评论，欢迎来盖楼！
