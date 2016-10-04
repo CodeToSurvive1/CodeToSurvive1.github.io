@@ -80,3 +80,6 @@ mac:app-inspector mac$ APP_INSPECTOR=dev ./bin/app-inspector -u DU2MYN146D002912
 mac:app-inspector mac$ npm run build
 mac:app-inspector mac$ ./bin/app-inspector -u DU2MYN146D002912
 ```
+
+## 参考来源
+https://github.com/alibaba/macaca/issues/228
