@@ -7,15 +7,17 @@ date: "2016-10-04 22:42"
 ---
 
 # github从源代码库更新到自己fork的代码库
+
 <br>
+
 ### 1.以自己从macacajs源代码库中fork的https://github.com/CodeToSurvive1/app-inspector.git为例子
+
 切换到本地app-inspector目录中
 
 ```xml
 mac:app-inspector mac$ git remote -v
 origin	https://github.com/CodeToSurvive1/app-inspector.git (fetch)
 origin	https://github.com/CodeToSurvive1/app-inspector.git (push)
-
 ```
 
 ### 2.添加上游源代码的仓库地址
