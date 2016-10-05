@@ -449,6 +449,7 @@ public class Command {
   4.各个处理类分析   
 
    4.1 Ping代码分析，该方法直接返回成功标志，实际上没有具体的业务含义，可能只是为了测试手机服务端启动的成功与否   
+   
 ```java
 
 public class Ping extends CommandBase {
@@ -464,7 +465,9 @@ public class Ping extends CommandBase {
 }
 
 ```
+
   4.2 Wake 模拟电源按键，核心调用的UiDevice中的wakeUp方法
+
 ```java
 public class Wake extends CommandBase {
 	@Override
@@ -539,6 +542,7 @@ public class GetText extends CommandBase {
 	}
 }
 ```
+
   4.5 Click 点击操作 该处理类也是同样根据传递进来的ElementId获取到macaca封装的Element元素后，调用click方法，核心也是调用的UiObject中的click方法    
 
 ```java
@@ -592,7 +596,9 @@ public class ClearText extends CommandBase {
   }
 
 ```
+
   4.7 Swipe 滑动 该处理类直接根据参数获取（开始位置坐标，结束位置坐标）+持续时间，然后直接调用UiDevice中的swipe滑动方法实现
+
 ```java
 public class Swipe extends CommandBase {
     @Override
@@ -632,7 +638,9 @@ public class GetWindowSize extends CommandBase {
 	}
 }
 ```
-  4.9 GetProperties 获取手机属性 包括元素长度、宽度、中心坐标、左上位置坐标、面积  
+
+  4.9 GetProperties 获取手机属性 包括元素长度、宽度、中心坐标、左上位置坐标、面积
+
 ```java
 public class GetProperties extends CommandBase {
     @Override
@@ -661,6 +669,7 @@ public class GetProperties extends CommandBase {
     }
 }
 ```
+
   4.10 GetSource 获取当前画面的dump的xml文件 直接调用UiDevice中的dump方法生成macaca-dump.xml文件，然后在js中通过adb命令pull拉取到电脑本地文件系统中    
 ```java
 public class GetSource extends CommandBase {
