@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: http://www.panxw.com/atom.xml
+Sitemap: https://codetosurvive1.github.io/atom.xml
