@@ -33,7 +33,7 @@ date: "2016-10-05 07:54"
 ```
 ***
 
-#### 软件下载 
+#### 软件下载
   这里直接使用上面的第二种方式，源码下载安装方式查看
 
 ```xml
@@ -61,7 +61,8 @@ date: "2016-10-05 07:54"
 
   macaca-android代码目录lib下核心代码为controllers.js和macaca-android.js
 
-  macaca-android.js中构造函数
+  macaca-android.js中构造函数  
+
 ```js
 class Android extends DriverBase {
   constructor() {
@@ -106,7 +107,6 @@ Android.prototype.startDevice = function *(caps) {
 };
 ```
 
-
 ```js
 Android.prototype.initUiautomator = function *() {
   this.uiautomator = new UIAutomator();
@@ -114,13 +114,16 @@ Android.prototype.initUiautomator = function *() {
 };
 ```
 
-  UIAutomator引入包uiautomator-client    
+  UIAutomator引入包uiautomator-client  
+
 ```js
   const UIAutomator = require('uiautomator-client');    
 ```
+
   查看uiautomator-client包下lib下的uiautomator-client.js  
 
   UIAutomator的构造函数及init方法
+
 ```js
 function UIAutomator() {
   this.adb = null;
@@ -217,6 +220,7 @@ UIAutomator.prototype.initSocketClient = function() {
   });
 };
 ```
+
   电脑客户端连接比较简单，直接连接上服务端，并注册监听事件。
 
 ```js
@@ -229,7 +233,8 @@ UIAutomator.prototype.send = function *(cmd) {
   return yield defer.promise;
 };
 ```
-  这是另外的一个发送的方法send，直接将指令发送到服务端,该方法的调用在macaca-android.js中,这里很简单直接调用并返回响应码
+  这是另外的一个发送的方法send，直接将指令发送到服务端,该方法的调用在macaca-android.js中,这里很简单直接调用并返回响应码  
+
 ```js
 
 Android.prototype.send = function *(data) {
@@ -253,7 +258,9 @@ Android.prototype.send = function *(data) {
 ```  
 
 ***
+
 #### 手机端uiautomator源码导入
+
 ![uiautomator源码](../assets/14756529485819.jpg)  
 
   从这里的目录可以看出macaca中对于uiautomator的java源代码封装，下面使用idea进行相关源码导入
@@ -277,7 +284,9 @@ Android.prototype.send = function *(data) {
 ![](../assets/14756534969506.jpg)
 
 ***
+
 #### 手机端uiautomator源码分析
+
   1.直接查看上面js中指定的com.android.uiautomator.client.Initialize源码
 
 ```java
@@ -310,9 +319,11 @@ public class Initialize extends UiAutomatorTestCase {
 	}
 }
 ```
-  可以看出，该类直接继承自uiautomator框架中的UiAutomatorTestCase，该方法直接获取传递进来的参数port和flag，并传递给SocketServer类
+
+  可以看出，该类直接继承自uiautomator框架中的UiAutomatorTestCase，该方法直接获取传递进来的参数port和flag，并传递给SocketServer类  
 
   2.SocketServer类是简单的java tcp服务端实现类
+
 ```java
 package com.android.uiautomator.client;
 
@@ -394,9 +405,11 @@ public class SocketServer {
 	}
 }
 ```
-  该类的核心代码在listen方法，该方法即为死循环，不停的接受发送过来的指令，然后处理执行Command.handleInput，并将处理的结果返回
 
-  3.Command.handleInput处理接受到的指令并解析，并根据命令将命令参数传递给不同的实现类
+  该类的核心代码在listen方法，该方法即为死循环，不停的接受发送过来的指令，然后处理执行Command.handleInput，并将处理的结果返回  
+
+  3.Command.handleInput处理接受到的指令并解析，并根据命令将命令参数传递给不同的实现类  
+
 ```java
 package com.android.uiautomator.client;
 
@@ -460,7 +473,8 @@ public class Command {
 	}
 }
 ```
-  其中的handleInput即接受指令，然后从指令中获取命令和命令参数，并调用getMap().get(cmd).execute(args)，而getMap()中的map的初始化在static域中
+
+  其中的handleInput即接受指令，然后从指令中获取命令和命令参数，并调用getMap().get(cmd).execute(args)，而getMap()中的map的初始化在static域中  
 
 
   | 命令 | 处理类 | 作用 |
