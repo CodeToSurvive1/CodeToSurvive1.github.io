@@ -28,8 +28,8 @@ date: "2016-10-05 07:54"
 可以通过两种方式获取：
 
 ```xml
-    1.  安装macaca-cli及android驱动，[可以参考macaca环境搭建](https://codetosurvive1.github.io/posts/macaca-environment.html)，安装成功后会在对应的目录下生成node_moduels下,可以直接查看/usr/local/lib/node_modules/macaca-android驱动，该驱动依赖于macaca-adb以及uiautomator-client
-    2.  源码方式查看，直接从github下载源代码并安装相关依赖包
+      1. 安装macaca-cli及android驱动，[可以参考macaca环境搭建](https://codetosurvive1.github.io/posts/macaca-environment.html)，安装成功后会在对应的目录下生成node_moduels下,可以直接查看/usr/local/lib/node_modules/macaca-android驱动，该驱动依赖于macaca-adb以及uiautomator-client
+      2. 源码方式查看，直接从github下载源代码并安装相关依赖包
 ```
 ***
 
@@ -291,18 +291,7 @@ Android.prototype.send = function *(data) {
   1.直接查看上面js中指定的com.android.uiautomator.client.Initialize源码
 
 ```java
-package com.android.uiautomator.client;
 
-import com.android.uiautomator.testrunner.UiAutomatorTestCase;
-import org.json.JSONException;
-
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
-
-/**
- * @author xdf
- *
- */
 public class Initialize extends UiAutomatorTestCase {
 
 	/**
@@ -326,31 +315,10 @@ public class Initialize extends UiAutomatorTestCase {
   2.SocketServer类是简单的java tcp服务端实现类
 
 ```java
-package com.android.uiautomator.client;
 
-import org.json.JSONException;
-
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
-
-/**
- * @author xdf
- *
- */
 public class SocketServer {
-	/**
-	 *
-	 */
-	private ServerSocket server;
 
-	/**
-	 * @author xdf
-	 * @param port
-	 * @throws IOException
-	 *
-	 */
+	private ServerSocket server;
 
 	public SocketServer(int port) throws IOException {
 		setServer(new ServerSocket(port));
@@ -412,19 +380,6 @@ public class SocketServer {
   3.Command.handleInput处理接受到的指令并解析，并根据命令将命令参数传递给不同的实现类  
 
 ```java
-package com.android.uiautomator.client;
-
-import com.android.uiautomator.client.cmd.*;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import javax.xml.parsers.ParserConfigurationException;
-import java.util.HashMap;
-
-/**
- * @author xdf
- *
- */
 public class Command {
 	/**
 	 *
@@ -477,7 +432,6 @@ public class Command {
 
   其中的handleInput即接受指令，然后从指令中获取命令和命令参数，并调用getMap().get(cmd).execute(args)，而getMap()中的map的初始化在static域中  
 
-
   | 命令 | 处理类 | 作用 |
   | ping | Ping() | 测试连通 |
   | wake | Wake() | 模拟按电源键 |
@@ -490,3 +444,422 @@ public class Command {
   | getWindowSize | GetWindowSize() | 获取手机长宽 |
   | getProperties | GetProperties() | 获取手机属性 |
   | getSource | GetSource() | 获取当前画面的dump的xml文件 |
+
+
+  4.各个处理类分析   
+
+   4.1 Ping代码分析，该方法直接返回成功标志，实际上没有具体的业务含义，可能只是为了测试手机服务端启动的成功与否   
+```java
+
+public class Ping extends CommandBase {
+	@Override
+	public String execute(JSONObject args) throws JSONException {
+		try {
+			return success((Object) "it works!");
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return failed("UnknownError");
+		}
+	}
+}
+
+```
+  4.2 Wake 模拟电源按键，核心调用的UiDevice中的wakeUp方法
+```java
+public class Wake extends CommandBase {
+	@Override
+	public String execute(JSONObject args) throws JSONException {
+		try {
+			UiDevice.getInstance().wakeUp();
+			return success((Object) true);
+		} catch (final RemoteException e) {
+			Utils.output(e.toString());
+		}
+		return failed("UnknownError");
+	}
+}
+```
+  4.3 SetText 设置文本内容，该处理类也是同样根据传递进来的ElementId获取到macaca封装的Element元素后，调用setText方法，核心也是调用的UiObject中的setText方法  
+
+```java
+public class SetText extends CommandBase {
+    @Override
+    public String execute(JSONObject args) throws JSONException {
+        try {
+
+            String elementId = (String) args.get("elementId");
+            String text = (String) args.get("text");
+
+            Element element = Elements.getGlobal().getElement(elementId);
+
+            boolean needPressEnter = false;
+
+            if (text.endsWith("\\n")) {
+                needPressEnter = true;
+                text = text.replace("\\n", "");
+            }
+
+            Charset UTF7 = Charset.forName("UTF-7");
+            Charset ASCII = Charset.forName("US-ASCII");
+
+            byte[] encoded = text.getBytes(UTF7);
+            String str = new String(encoded, ASCII);
+
+            boolean result = element.setText(str);
+
+            if (needPressEnter) {
+                final UiDevice d = UiDevice.getInstance();
+                d.pressEnter();
+            }
+
+            return success(result);
+        } catch (final UiObjectNotFoundException e) {
+            return failed("NoSuchElement");
+        } catch (final Exception e) {
+            return failed("UnknownError");
+        }
+    }
+}
+```
+
+  4.4 GetText 获取文本内容，该处理类也是同样根据传递进来的ElementId获取到macaca封装的Element元素后，调用getText方法，核心也是调用的UiObject中的getText方法    
+```java
+
+public class GetText extends CommandBase {
+	@Override
+	public String execute(JSONObject args) throws JSONException {
+
+		try {
+			String elementId = (String) args.get("elementId");
+			Element element = Elements.getGlobal().getElement(elementId);
+			return success(element.getText());
+		} catch (final Exception e) {
+			return failed("UnknownError");
+		}
+	}
+}
+```
+  4.5 Click 点击操作 该处理类也是同样根据传递进来的ElementId获取到macaca封装的Element元素后，调用click方法，核心也是调用的UiObject中的click方法    
+
+```java
+
+public class Click extends CommandBase {
+    @Override
+    public String execute(JSONObject args) throws JSONException {
+        try {
+            String elementId = (String) args.get("elementId");
+            Element el = Elements.getGlobal().getElement(elementId);
+
+            el.click();
+            return success(true);
+        } catch (final UiObjectNotFoundException e) {
+            return failed("NoSuchElement");
+        } catch (final Exception e) {
+            return failed("UnknownError");
+        }
+    }
+}
+```
+  4.6 ClearText 清空文本 该操作类通过参数中获取的元素id获取到元素后，直接调用Element元素的clearText方法，而Element元素是macaca自己封装的Uiautomator中的UIObject类中的clearTextField方法  
+
+```java
+
+public class ClearText extends CommandBase {
+    @Override
+    public String execute(JSONObject args) throws JSONException {
+        try {
+            String elementId = (String) args.get("elementId");
+            Element el = Elements.getGlobal().getElement(elementId);
+
+            el.clearText();
+            return success(true);
+        } catch (final UiObjectNotFoundException e) {
+            return failed("NoSuchElement");
+        } catch (final Exception e) {
+            return failed("UnknownError");
+        }
+    }
+}
+
+```
+```java
+  public UiObject element;
+  /**
+  * @throws UiObjectNotFoundException
+  */
+  public void clearText() throws UiObjectNotFoundException {
+    element.clearTextField();
+  }
+
+```
+  4.7 Swipe 滑动 该处理类直接根据参数获取（开始位置坐标，结束位置坐标）+持续时间，然后直接调用UiDevice中的swipe滑动方法实现
+```java
+public class Swipe extends CommandBase {
+    @Override
+    public String execute(JSONObject args) throws JSONException {
+        try {
+            Integer startX = (Integer) args.get("startX");
+            Integer startY = (Integer) args.get("startY");
+            Integer endX = (Integer) args.get("endX");
+            Integer endY = (Integer) args.get("endY");
+            Integer duration = (Integer) args.get("duration");
+            boolean result = UiDevice.getInstance().swipe(startX, startY, endX, endY, duration);
+
+            return success(result);
+        } catch (final Exception e) {
+            return failed("UnknownError");
+        }
+    }
+}
+```
+  4.8 GetWindowSize 获取手机长宽 直接调用UiDevice获取长度和宽度返回  
+
+```java
+
+public class GetWindowSize extends CommandBase {
+	@Override
+	public String execute(JSONObject args) throws JSONException {
+		try {
+			Integer width = UiDevice.getInstance().getDisplayWidth();
+			Integer height = UiDevice.getInstance().getDisplayHeight();
+			JSONObject size = new JSONObject();
+			size.put("width", width);
+			size.put("height", height);
+			return success(size.toString());
+		} catch(JSONException e) {
+			return failed("UnknownError");
+		}
+	}
+}
+```
+  4.9 GetProperties 获取手机属性 包括元素长度、宽度、中心坐标、左上位置坐标、面积  
+```java
+public class GetProperties extends CommandBase {
+    @Override
+    public String execute(JSONObject args) throws JSONException {
+        try {
+            String elementId = (String) args.get("elementId");
+            Element el = Elements.getGlobal().getElement(elementId);
+            final Rect rect = el.element.getBounds();
+            JSONObject size = new JSONObject();
+            size.put("width", rect.width());
+            size.put("height", rect.height());
+            size.put("centerX", rect.centerX());
+            size.put("centerY", rect.centerY());
+            JSONObject origin = new JSONObject();
+            origin.put("x", rect.left);
+            origin.put("y", rect.top);
+            JSONObject props = new JSONObject();
+            props.put("origin", origin);
+            props.put("size", size);
+            return success(props.toString());
+        } catch (final UiObjectNotFoundException e) {
+            return failed("NoSuchElement");
+        } catch (final Exception e) {
+            return failed("UnknownError");
+        }
+    }
+}
+```
+  4.10 GetSource 获取当前画面的dump的xml文件 直接调用UiDevice中的dump方法生成macaca-dump.xml文件，然后在js中通过adb命令pull拉取到电脑本地文件系统中    
+```java
+public class GetSource extends CommandBase {
+
+    private static final String dumpFileName = "macaca-dump.xml";
+
+    @Override
+    public String execute(JSONObject args) throws JSONException {
+        try {
+
+            final File dump = new File(new File(Environment.getDataDirectory(),
+                    "local/tmp"), dumpFileName);
+            dump.mkdirs();
+            if (dump.exists()) {
+                dump.delete();
+            }
+            UiDevice.getInstance().dumpWindowHierarchy(dumpFileName);
+            return success(true);
+        } catch (final Exception e) {
+            return failed("UnknownError");
+        }
+    }
+}
+```
+  4.11 Find 查找页面元素 首先传递参数需要三个
+
+  策略：即为通过什么来获取元素，这里有class_Name、name、id、xpath  
+
+  值:即策略所对应的取值
+
+  是否支持多个查询:是否支持多个查询或者找到匹配元素即返回   
+```java
+public class Find extends CommandBase {
+
+	private Elements elements = Elements.getGlobal();
+
+	@Override
+	public String execute(JSONObject args) throws JSONException,
+			ParserConfigurationException {
+		try {
+			String strategy = (String) args.get("strategy");
+			String selector = (String) args.get("selector");
+			Boolean multiple = (Boolean) args.get("multiple");
+
+			strategy = strategy.trim().replace(" ", "_").toUpperCase();
+			Object result = null;
+			List<UiSelector> selectors = null;
+			try {
+				selectors = getSelectors(strategy, selector,
+						multiple);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			boolean found = false;
+
+			if (multiple) {
+				List<Element> foundElements = new ArrayList<Element>();
+				for (UiSelector item : selectors) {
+					try {
+						final List<Element> elementsFromSelector = getElements(item);
+						foundElements.addAll(elementsFromSelector);
+					} catch (final UiObjectNotFoundException ignored) {
+					}
+				}
+				found = foundElements.size() > 0;
+				result = elementsToJSONArray(foundElements);
+
+			} else {
+				for (int i = 0; i < selectors.size() && !found; i++) {
+					try {
+						result = getElement(selectors.get(i));
+						found = result != null;
+					} catch (Exception ignored) {
+						Utils.output("ignored selector");
+					}
+				}
+			}
+
+			if (!found) {
+				return failed("ElementNotFound");
+			}
+
+			return success((Object) result);
+		} catch (JSONException e) {
+			e.printStackTrace();
+			return failed("UnknownError");
+		}
+	}
+
+	/**
+	 * @param strategy
+	 * @param text
+	 * @param multiple
+	 * @return res
+	 * @throws ParserConfigurationException
+	 */
+	private List<UiSelector> getSelectors(String strategy, String text,
+			boolean multiple) throws Exception {
+
+		final List<UiSelector> list = new ArrayList<UiSelector>();
+
+		UiSelector selectors = new UiSelector();
+
+		if (strategy.equals("CLASS_NAME")) {
+			selectors = selectors.className(text);
+
+			if (!multiple) {
+				selectors = selectors.instance(0);
+			}
+			list.add(selectors);
+		} else if (strategy.equals("NAME")) {
+			selectors = new UiSelector().description(text);
+			if (!multiple) {
+				selectors = selectors.instance(0);
+			}
+			list.add(selectors);
+
+			selectors = new UiSelector().text(text);
+			if (!multiple) {
+				selectors = selectors.instance(0);
+			}
+			list.add(selectors);
+		} else if (strategy.equals("ID")) {
+			selectors = selectors.resourceId(text);
+
+			if (!multiple) {
+				selectors = selectors.instance(0);
+			}
+			list.add(selectors);
+		} else if(strategy.equals("XPATH")) {
+			final ArrayList<UiSelector> pairs = XmlUtils.getSelectors(text);
+
+			if (!multiple) {
+				if (pairs.size() == 0) {
+					throw new Exception("Could not find an element using given xpath expression.");
+				}
+				list.add(pairs.get(0));
+			} else {
+				for (final UiSelector pair : pairs) {
+					list.add(pair);
+				}
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * @param sel
+	 * @return res
+	 * @throws JSONException
+	 * @throws Exception
+	 */
+	private JSONObject getElement(final UiSelector sel) throws JSONException,
+			Exception {
+		final JSONObject res = new JSONObject();
+		final Element element = getElements().getElement(sel);
+		return res.put("ELEMENT", element.getId());
+	}
+
+	/**
+	 * @param sel
+	 * @return res
+	 * @throws UiObjectNotFoundException
+	 */
+	private ArrayList<Element> getElements(final UiSelector sel)
+			throws UiObjectNotFoundException {
+		return elements.getElements(sel);
+	}
+
+	/**
+	 * @param elems
+	 * @return res
+	 * @throws JSONException
+	 */
+	private JSONArray elementsToJSONArray(final List<Element> elems)
+			throws JSONException {
+		JSONArray resArray = new JSONArray();
+		for (Element element : elems) {
+			resArray.put(new JSONObject().put("ELEMENT", element.getId()));
+		}
+		return resArray;
+	}
+
+	/**
+	 * @return res
+	 */
+	public Elements getElements() {
+		return elements;
+	}
+
+	/**
+	 * @param elements
+	 */
+	public void setElements(Elements elements) {
+		this.elements = elements;
+	}
+}
+```
+
+#### 疑问
+  既然macaca封装的时候通过两种方式进行封装，adb命令和uiautomator，那么何时使用adb？何时使用Uiautomator呢？带着疑问向macaca团队提出issue，相关疑问解答参考连接[macaca-android驱动封装规则](https://github.com/alibaba/macaca/issues/239)  
