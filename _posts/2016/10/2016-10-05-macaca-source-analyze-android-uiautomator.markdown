@@ -672,7 +672,7 @@ public class GetProperties extends CommandBase {
 ```
 
   4.10 GetSource 获取当前画面的dump的xml文件 直接调用UiDevice中的dump方法生成macaca-dump.xml文件，然后在js中通过adb命令pull拉取到电脑本地文件系统中    
-  
+
 ```java
 public class GetSource extends CommandBase {
 
@@ -703,6 +703,7 @@ public class GetSource extends CommandBase {
   值:即策略所对应的取值
 
   是否支持多个查询:是否支持多个查询或者找到匹配元素即返回   
+  
 ```java
 public class Find extends CommandBase {
 
