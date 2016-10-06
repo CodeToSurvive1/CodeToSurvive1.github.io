@@ -64,7 +64,7 @@ date: "2016-10-05 07:54"
 
   macaca-android.js中构造函数  
 
-```js
+{% codehilite java %}
 class Android extends DriverBase {
   constructor() {
     super();
@@ -82,7 +82,7 @@ class Android extends DriverBase {
     this.contexts = [];
   }
 }
-```
+{% endhighlight %}
 
   启动设备
 
@@ -703,7 +703,7 @@ public class GetSource extends CommandBase {
   值:即策略所对应的取值
 
   是否支持多个查询:是否支持多个查询或者找到匹配元素即返回   
-  
+
 ```java
 public class Find extends CommandBase {
 

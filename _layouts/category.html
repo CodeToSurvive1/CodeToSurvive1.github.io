@@ -10,6 +10,8 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
     <link href="/css/blog.css" rel="stylesheet"/>
+    <link href="/css/monokai.css" rel="stylesheet"/>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media
     queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file://
@@ -25,7 +27,7 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="/js/bootstrap.min.js"></script>
   </head>
-  
+
   <body>
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -49,7 +51,7 @@
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          {% include navigation.html %} 
+          {% include navigation.html %}
         </div>
         <!-- /.navbar-collapse -->
       </div>
@@ -68,12 +70,12 @@
 			  {% capture y %}{{post.date | date:"%Y"}}{% endcapture %}
 			  {% if year != y %}
 				{% assign year = y %}
-				<h2>{{ post.date | date: '%Y' }}</h2> 
+				<h2>{{ post.date | date: '%Y' }}</h2>
 			  {% endif %}
 			  <li>
 				<h4><span>{{ post.date | date:"%Y-%m-%d" }}</span>&raquo;
 				<a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h4>
-			  </li> 
+			  </li>
 			{% endfor %}
 			</ul>
         </div>
@@ -85,13 +87,13 @@
               栏目分类
             </h4>
             <div class="row">
-              {% include categories.html %} 
+              {% include categories.html %}
             </div>
             <!-- /.row -->
           </div>
           <!-- Side Widget Well -->
           <div class="well-ad">
-            {% include adsense.html %} 
+            {% include adsense.html %}
           </div>
 		  <!-- Blog Recent Well -->
           <div class="well">
@@ -99,7 +101,7 @@
               最新文章
             </h4>
 			<div class="row">
-              {% include recent_posts.html %} 
+              {% include recent_posts.html %}
 			</div>
           </div>
         </div>
@@ -109,11 +111,11 @@
       <!-- Footer -->
       <footer>
 		<div style="text-align:center">
-			{% include adsense_728x90.html %} 
+			{% include adsense_728x90.html %}
 		</div>
         <div class="row">
           <div class="col-lg-12">
-            {% include copyright.html %} 
+            {% include copyright.html %}
           </div>
           <!-- /.col-lg-12 -->
         </div>
