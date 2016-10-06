@@ -64,7 +64,7 @@ date: "2016-10-05 07:54"
 
   macaca-android.js中构造函数  
 
-{% highlight javascript %}
+```javascript
 class Android extends DriverBase {
   constructor() {
     super();
@@ -82,11 +82,11 @@ class Android extends DriverBase {
     this.contexts = [];
   }
 }
-{% endhighlight %}
+```
 
   启动设备  
 
-{%highlight javascript %}
+```javascript
 Android.prototype.startDevice = function *(caps) {
   this.args = _.clone(caps);
   this.isChrome = this.args.browserName && this.args.browserName.toLowerCase() === 'chrome';
@@ -105,40 +105,35 @@ Android.prototype.startDevice = function *(caps) {
     yield this.getWebviews();
   }
 };
-{%endhighlight%}
+```
 
-
-{%highlight javascript %}
-
+```javascript
   Android.prototype.initUiautomator = function *() {
   this.uiautomator = new UIAutomator();
   yield this.uiautomator.init(this.adb);
   };
-{%endhighlight%}
-
+```
 
   UIAutomator引入包uiautomator-client  
 
-{%highlight javascript %}
+```javascript
   const UIAutomator = require('uiautomator-client');    
-{% endhighlight %}
-
+```
 
   查看uiautomator-client包下lib下的uiautomator-client.js  
 
   UIAutomator的构造函数及init方法
 
-{%highlight javascript %}
+```javascript
 function UIAutomator() {
   this.adb = null;
   this.socket = null;
   this.socketPort = 6789;
   this.queue = [];
 }
-{% endhighlight %}
+```
 
-
-{%highlight javascript %}
+```javascript
 UIAutomator.prototype.init = function *(adb) {
   this.adb = adb;
   const ANDROID_TMP_DIR = this.adb.getTmpDir();
@@ -162,11 +157,11 @@ UIAutomator.prototype.init = function *(adb) {
   yield this.initSocketServer();
   yield this.initSocketClient();
 };
-{% endhighlight %}
+```
 
   从上面的构造函数及init方法中可以看出，默认构造了6789端口，然后调用init初始化方法中，首先删除了安卓手机临时目录'/data/local/tmp'中的uiautomator-bootstrap.jar包,然后上传jar包到临时目录下，并杀掉手机中的uiautomator进程，并将手机端口与电脑端口进行映射，最后初始化手机端的服务器及电脑端的客户端连接。
 
-{%highlight javascript %}
+```javascript
 UIAutomator.prototype.initSocketServer = function() {
   return new Promise((resolve, reject) => {
     const ANDROID_TMP_DIR = this.adb.getTmpDir();
@@ -193,11 +188,10 @@ UIAutomator.prototype.initSocketServer = function() {
   });
 };
 
-{% endhighlight %}
-
+```
   初始化手机服务端方法中，可以看出是直接调用通过adb shell调用手机中的uiautomator执行uiautomator的测试集adb shell uiautomator runtest ${ANDROID_TMP_DIR}/${FILE_NAME}.jar -c ${CLASS_NAME} -e port ${this.socketPort} -e flag ${READY_FLAG}，这里的${ANDROID_TMP_DIR}/${FILE_NAME}.jar指的是/data/local/tmp/uiautomator-bootstrap.jar,-c指定要运行的测试类，即为com.android.uiautomator.client.Initialize，-e指定参数，这里指定了两个参数，一个是port，一个是flag
 
-{%highlight javascript %}
+```javascript
 UIAutomator.prototype.initSocketClient = function() {
   return new Promise((resolve, reject) => {
     this.socket = net.connect(this.socketPort, () => {
@@ -227,12 +221,11 @@ UIAutomator.prototype.initSocketClient = function() {
     });
   });
 };
-{% endhighlight %}
-
+```
 
   电脑客户端连接比较简单，直接连接上服务端，并注册监听事件。
 
-{%highlight javascript %}
+```javascript
 UIAutomator.prototype.send = function *(cmd) {
   var defer = new _.Defer();
   defer.promise.then(data => {
@@ -241,11 +234,11 @@ UIAutomator.prototype.send = function *(cmd) {
   this.socket.write(`${JSON.stringify(cmd)}\n`);
   return yield defer.promise;
 };
-{% endhighlight %}
+```
 
   这是另外的一个发送的方法send，直接将指令发送到服务端,该方法的调用在macaca-android.js中,这里很简单直接调用并返回响应码  
 
-{%highlight javascript %}
+```javascript
 
 Android.prototype.send = function *(data) {
   try {
@@ -265,8 +258,7 @@ Android.prototype.send = function *(data) {
     throw new errors[errName](result.value);
   }
 };
-{% endhighlight %}
-
+```
 
 ***
 
@@ -300,7 +292,7 @@ Android.prototype.send = function *(data) {
 
   1.直接查看上面js中指定的com.android.uiautomator.client.Initialize源码
 
-{%highlight java %}
+```java
 
 public class Initialize extends UiAutomatorTestCase {
 
@@ -319,14 +311,13 @@ public class Initialize extends UiAutomatorTestCase {
 	}
 }
 
-{% endhighlight %}
-
+```
 
   可以看出，该类直接继承自uiautomator框架中的UiAutomatorTestCase，该方法直接获取传递进来的参数port和flag，并传递给SocketServer类  
 
   2.SocketServer类是简单的java tcp服务端实现类
 
-{%highlight java %}
+```java
 
 public class SocketServer {
 
@@ -386,14 +377,13 @@ public class SocketServer {
 	}
 }
 
-{% endhighlight %}
-
+```
 
   该类的核心代码在listen方法，该方法即为死循环，不停的接受发送过来的指令，然后处理执行Command.handleInput，并将处理的结果返回  
 
   3.Command.handleInput处理接受到的指令并解析，并根据命令将命令参数传递给不同的实现类  
 
-{%highlight java %}
+```java
 
 public class Command {
 	/**
@@ -443,8 +433,7 @@ public class Command {
 		Command.map = map;
 	}
 }
-{% endhighlight %}
-
+```
 
   其中的handleInput即接受指令，然后从指令中获取命令和命令参数，并调用getMap().get(cmd).execute(args)，而getMap()中的map的初始化在static域中  
 
@@ -466,7 +455,7 @@ public class Command {
 
    4.1 Ping代码分析，该方法直接返回成功标志，实际上没有具体的业务含义，可能只是为了测试手机服务端启动的成功与否   
 
-{%highlight java %}  
+```java
 
 public class Ping extends CommandBase {
 	@Override
@@ -480,12 +469,11 @@ public class Ping extends CommandBase {
 	}
 }
 
-{% endhighlight %}
-
+```
 
   4.2 Wake 模拟电源按键，核心调用的UiDevice中的wakeUp方法
 
-{%highlight java %}    
+```java
 
 public class Wake extends CommandBase {
 	@Override
@@ -499,12 +487,11 @@ public class Wake extends CommandBase {
 		return failed("UnknownError");
 	}
 }
-{% endhighlight %}
-
+```
 
   4.3 SetText 设置文本内容，该处理类也是同样根据传递进来的ElementId获取到macaca封装的Element元素后，调用setText方法，核心也是调用的UiObject中的setText方法  
 
-{%highlight java %}  
+```java
 
 public class SetText extends CommandBase {
     @Override
@@ -544,12 +531,11 @@ public class SetText extends CommandBase {
         }
     }
 }
-{% endhighlight %}
-
+```
 
   4.4 GetText 获取文本内容，该处理类也是同样根据传递进来的ElementId获取到macaca封装的Element元素后，调用getText方法，核心也是调用的UiObject中的getText方法  
 
-{%highlight java %}  
+```java
 
 public class GetText extends CommandBase {
 	@Override
@@ -565,12 +551,11 @@ public class GetText extends CommandBase {
 	}
 }
 
-{% endhighlight %}
-
+```
 
   4.5 Click 点击操作 该处理类也是同样根据传递进来的ElementId获取到macaca封装的Element元素后，调用click方法，核心也是调用的UiObject中的click方法    
 
-{%highlight java %}  
+```java
 
 public class Click extends CommandBase {
     @Override
@@ -589,11 +574,11 @@ public class Click extends CommandBase {
     }
 }
 
-{% endhighlight %}
+```
 
   4.6 ClearText 清空文本 该操作类通过参数中获取的元素id获取到元素后，直接调用Element元素的clearText方法，而Element元素是macaca自己封装的Uiautomator中的UIObject类中的clearTextField方法  
 
-{%highlight java %}
+```java
 
 public class ClearText extends CommandBase {
     @Override
@@ -612,10 +597,9 @@ public class ClearText extends CommandBase {
     }
 }
 
-{% endhighlight %}
+```
 
-
-{%highlight java %}
+```java
   public UiObject element;
   /**
   * @throws UiObjectNotFoundException
@@ -624,12 +608,11 @@ public class ClearText extends CommandBase {
     element.clearTextField();
   }
 
-{% endhighlight %}
-
+```
 
   4.7 Swipe 滑动 该处理类直接根据参数获取（开始位置坐标，结束位置坐标）+持续时间，然后直接调用UiDevice中的swipe滑动方法实现
 
-{%highlight java %}  
+```java
 public class Swipe extends CommandBase {
     @Override
     public String execute(JSONObject args) throws JSONException {
@@ -647,11 +630,11 @@ public class Swipe extends CommandBase {
         }
     }
 }
-{% endhighlight %}
+```
 
   4.8 GetWindowSize 获取手机长宽 直接调用UiDevice获取长度和宽度返回  
 
-{%highlight java %}  
+```java
 public class GetWindowSize extends CommandBase {
 	@Override
 	public String execute(JSONObject args) throws JSONException {
@@ -667,12 +650,11 @@ public class GetWindowSize extends CommandBase {
 		}
 	}
 }
-{% endhighlight %}
-
+```
 
   4.9 GetProperties 获取手机属性 包括元素长度、宽度、中心坐标、左上位置坐标、面积
 
-{%highlight java %}
+```java
 public class GetProperties extends CommandBase {
     @Override
     public String execute(JSONObject args) throws JSONException {
@@ -699,12 +681,11 @@ public class GetProperties extends CommandBase {
         }
     }
 }
-{% endhighlight %}
-
+```
 
   4.10 GetSource 获取当前画面的dump的xml文件 直接调用UiDevice中的dump方法生成macaca-dump.xml文件，然后在js中通过adb命令pull拉取到电脑本地文件系统中    
 
-{%highlight java %}
+```java
 public class GetSource extends CommandBase {
 
     private static final String dumpFileName = "macaca-dump.xml";
@@ -726,8 +707,7 @@ public class GetSource extends CommandBase {
         }
     }
 }
-{% endhighlight %}
-
+```
   4.11 Find 查找页面元素 首先传递参数需要三个
 
   策略：即为通过什么来获取元素，这里有class_Name、name、id、xpath  
@@ -736,7 +716,7 @@ public class GetSource extends CommandBase {
 
   是否支持多个查询:是否支持多个查询或者找到匹配元素即返回   
 
-{%highlight java %}
+```java
 public class Find extends CommandBase {
 
 	private Elements elements = Elements.getGlobal();
@@ -903,8 +883,7 @@ public class Find extends CommandBase {
 		this.elements = elements;
 	}
 }
-{% endhighlight %}
-
+```
 
 #### 疑问
   既然macaca封装的时候通过两种方式进行封装，adb命令和uiautomator，那么何时使用adb？何时使用Uiautomator呢？带着疑问向macaca团队提出issue，相关疑问解答参考连接[macaca-android驱动封装规则](https://github.com/alibaba/macaca/issues/239)  

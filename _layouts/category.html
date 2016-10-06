@@ -10,7 +10,9 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet"/>
     <!-- Custom CSS -->
     <link href="/css/blog.css" rel="stylesheet"/>
-    <link href="/css/pygments.css" rel="stylesheet"/>
+    <!-- <link href="/css/pygments.css" rel="stylesheet"/> -->
+    <link href="/css/prettify.css" rel="stylesheet"/>
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media
     queries -->
@@ -26,6 +28,8 @@
     <script src="/js/jquery-1.11.0.js"> </script>
     <!-- Bootstrap Core JavaScript -->
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/run_prettify.js"></script>
+
   </head>
 
   <body>
@@ -126,3 +130,9 @@
   </body>
 
 </html>
+<script type="text/javascript">
+  $(function(){
+    $("pre").addClass("prettyprint");
+    prettyPrint();
+  });
+</script>
