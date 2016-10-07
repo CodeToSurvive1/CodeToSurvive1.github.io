@@ -266,7 +266,7 @@ Android.prototype.send = function *(data) {
 
 ![uiautomator源码](../assets/14756529485819.jpg)  
 
-  从这里的目录可以看出macaca中对于uiautomator的java源代码封装，下面使用idea进行相关源码导入
+  从这里的目录可以看出macaca中对于uiautomator的java源代码封装，下面使用idea进行相关源码导入[或者直接通过github下载并添加lib下的jar包](https://github.com/CodeToSurvive1/UIAutomatorClient.git)
 
   1.建立普通java工程
 ![idea建立java](../assets/14756532355705.jpg)
