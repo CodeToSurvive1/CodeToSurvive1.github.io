@@ -15,8 +15,8 @@ title: "天道酬勤"
   </div>
 </h2>
 <hr>
-{{ post.excerpt }}
-	<p><h3><a href="{{ post.url }}">阅读全文 &raquo;</a></h3></p>
+{{ post.content | strip_html | strip_newlines | truncate:300}}
+<p><h3><a href="{{ post.url }}">阅读全文 &raquo;</a></h3></p>
 <hr>
 {% endfor %}
 
