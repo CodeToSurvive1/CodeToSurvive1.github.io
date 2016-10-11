@@ -6,7 +6,8 @@ category: "other"
 tags: [NOSQL]
 ---
 
-------
+------  
+
 #### mac系统安装步骤  
 
 1. 通过homebrew安装mongodb    
@@ -45,7 +46,8 @@ show collections;//查看当前数据库的集合，对应的应该是表的概�
 ```
 
 
-------
+------  
+
 #### 参考文档    
 
 
