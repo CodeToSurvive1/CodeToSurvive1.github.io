@@ -49,9 +49,10 @@ show collections;//查看当前数据库的集合，对应的应该是表的概�
 ```
 
 ------  
-#### 参考文档
-   
 
+#### 参考文档
+
+  
 [homebrew安装mongodb官方网站参考连接](https://docs.mongodb.com/master/tutorial/install-mongodb-on-os-x/?_ga=1.189997739.1003684487.1476107793)  
 
 [mongodb shell 使用](https://docs.mongodb.com/manual/tutorial/access-mongo-shell-help/)
