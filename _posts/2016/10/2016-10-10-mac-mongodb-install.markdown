@@ -46,13 +46,20 @@ Server has startup warnings:
 ```sql
 show databases;//查看数据库
 show collections;//查看当前数据库的集合，对应的应该是表的概念
+use hadoop;//如果没有则创建数据库，有则切换
+show dbs;//显示有数据的数据库
+db.hadoop.insert({'name':'hadoop'});//向hadoop数据库中插入数据
+db.dropDatabase();//删除当前数据库
+db.createCollection("users");//在当前连接的数据库中创建集合users
+show collections;//显示当前连接的数据库的所有集合
+db.users.drop();//删除当前连接数据库的Users集合
 ```
 
 ------  
 
 #### 参考文档
 
-  
+
 [homebrew安装mongodb官方网站参考连接](https://docs.mongodb.com/master/tutorial/install-mongodb-on-os-x/?_ga=1.189997739.1003684487.1476107793)  
 
 [mongodb shell 使用](https://docs.mongodb.com/manual/tutorial/access-mongo-shell-help/)
