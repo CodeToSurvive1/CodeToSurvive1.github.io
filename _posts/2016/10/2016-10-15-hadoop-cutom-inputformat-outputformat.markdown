@@ -1,6 +1,6 @@
 ---
 layout: "post"
-title: "自定义InputFormat"
+title: "hadoop自定义InputFormat"
 date: "2016-10-15 12:47"
 category: "hadoop"
 tags: [大数据]
