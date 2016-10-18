@@ -1,6 +1,6 @@
 ---
 layout: "post"
-title: "hadoop-cutom-inputformat-outputformat"
+title: "自定义InputFormat"
 date: "2016-10-15 12:47"
 category: "hadoop"
 tags: [大数据]
@@ -66,26 +66,32 @@ db.persons.find().toArray()
 
 ```	
 ------
+
 #### 业务逻辑	
+
 本例子是在mongodb数据库中存在person表，该表中存在三个字段，分别为名字，年龄，性别。通过编写map/reduce来实现读取数据库中的数据，然后通过map/reduce计算没个年龄的人数，并将结果输出到hdfs文件系统中。
 
 ------
-#### 实现逻辑
+
+#### 实现逻辑	
+
 由于从mongodb中读取person表中的数据，因此对于map阶段的输入来说，输入的key应该为行号，value应该为表中的一行记录。而reduce阶段的输出key应该为年龄，value为数量
 
 ------
-#### 代码逻辑
+
+#### 代码逻辑	
+
 自定义InputFormat要点：	
 1.继承InputFormat类并进行相关实现	
 InputFormat需要实现两个方法：		
 
 方法名称|作用	
-|----|---|
+|----|---|	
 InputSplit[] getSplits(JobConf job, int numSplits);|定义了分片信息如何获取
 RecordReader<K, V> getRecordReader(InputSplit split,JobConf job,Reporter reporter);|定义了如何读取记录数据	
 2.继承RecordReader类并进行相关实现	
 RecordReader需要实现两个方法:	
-
+	
 方法名称|作用	
 |----|---|
 public abstract void initialize(InputSplit split, TaskAttemptContext context );|对split初始化
