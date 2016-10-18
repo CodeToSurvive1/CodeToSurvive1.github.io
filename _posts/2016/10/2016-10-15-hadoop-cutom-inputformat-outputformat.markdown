@@ -84,12 +84,14 @@ db.persons.find().toArray()
 自定义InputFormat要点：	
 
 1.继承InputFormat类并进行相关实现		
-InputFormat需要实现两个方法：		
-
+	
+InputFormat需要实现两个方法:		
+	
 方法名称|作用	
-|----|---|	
+|----|---|
 InputSplit[] getSplits(JobConf job, int numSplits);|定义了分片信息如何获取
 RecordReader<K, V> getRecordReader(InputSplit split,JobConf job,Reporter reporter);|定义了如何读取记录数据	
+	
 2.继承RecordReader类并进行相关实现	
 RecordReader需要实现两个方法:	
 	
