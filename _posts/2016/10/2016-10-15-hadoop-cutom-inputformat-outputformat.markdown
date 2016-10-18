@@ -3,14 +3,15 @@ layout: "post"
 title: "hadoop自定义InputFormat"
 date: "2016-10-15 12:47"
 category: "hadoop"
-tags: [大数据]
+tags: [大数据,hadoop,InputFormat]
 ---
 
 
 #### 数据准备
-执行下面sql语句	
+执行下面sql语句		
 
 ```sql
+
 use hadoop
 db.persons.insert({name:"zhangsan",age:15,sex:"M"})
 db.persons.insert({name:"lisi",sex:"M"})
@@ -62,9 +63,10 @@ db.persons.find().toArray()
 		"sex" : "F"
 	}
 ]
->	
+
 
 ```	
+
 ------
 
 #### 业务逻辑	
