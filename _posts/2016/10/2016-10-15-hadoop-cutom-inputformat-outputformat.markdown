@@ -82,7 +82,8 @@ db.persons.find().toArray()
 #### 代码逻辑	
 
 自定义InputFormat要点：	
-1.继承InputFormat类并进行相关实现	
+
+1.继承InputFormat类并进行相关实现		
 InputFormat需要实现两个方法：		
 
 方法名称|作用	
@@ -564,7 +565,9 @@ public class MongoDBInputFormatRunner {
 ```	
 
 ------
+
 #### 代码测试	
+
 1. 启动mongodb服务端
 2. 运行runner测试类
 3. 查看hdfs中的数据
