@@ -31,7 +31,9 @@ china qingdao
 
 ```
 
-####一次排序实现逻辑  
+------
+
+#### 一次排序实现逻辑  
 
 1.编写mapper类
 
@@ -346,6 +348,8 @@ hadoop中的map/reduce的map阶段确实经过了排序的操作，而且是按�
 上面一次排序源代码连接：[一次排序源代码](https://github.com/CodeToSurvive1/bigdataproject/tree/master/src/main/java/mac/cn/SecondSort/before)
 
   
+------
+
 #### 二次排序
 
 
