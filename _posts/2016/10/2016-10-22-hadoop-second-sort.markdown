@@ -6,13 +6,14 @@ category: "hadoop"
 tags: [大数据]
 ---
 
-####map/reduce简单介绍  
+#### map/reduce简单介绍  
 
 正常的map/reduce程序而言，在map阶段会根据key自动进行排序，因此key必须会实现CompareWritable接口，即要能排序又要能够序列化，因此为了测试map的输出能够按照key自动进行排序，下面简单的例子是将文本中两列文本按照第一列进行排序，这里权且叫做一次排序。
 
 hdfs上/user/mac/mapreduce/sort/input/input.txt文件中的内容信息为：
 
-```txt
+```txt  
+
 hello world
 word hello
 li xiaojiao
@@ -27,6 +28,7 @@ good study
 hello jiao
 china shandong
 china qingdao
+
 ```
 
 ####一次排序实现逻辑  
@@ -35,7 +37,7 @@ china qingdao
 
 该类是将上面的文本由hadoop自己内部实现的机制(LineRecordReader)实现的将文件按照行为单位解析为<key,value>-><偏移量，每行内容>的结构作为map阶段的输入，比如上面的保存在/user/mac/mapreduce/sort/input/input.txt会被解析为：
 
-```txt
+```txt  
 0---->hello world
 12---->word hello
 23---->li xiaojiao
@@ -132,6 +134,7 @@ public class SortMapper extends Mapper<LongWritable, Text, Text, Text> {
     }
 }
 
+```
 
 2.编写reducer类  
 
@@ -342,8 +345,9 @@ china qingdao
 hadoop中的map/reduce的map阶段确实经过了排序的操作，而且是按照key进行排序，但是value是没有经过排序的。
 上面一次排序源代码连接：[一次排序源代码](https://github.com/CodeToSurvive1/bigdataproject/tree/master/src/main/java/mac/cn/SecondSort/before)
 
+  
+#### 二次排序
 
-####二次排序  
 
 从上面的一次排序中可以看出，在map阶段会把key按照排序规则进行排序，因此，如果我想对上面的原始数据进行二次排序呢，也就是说在一次排序把第一列进行排序的基础上，也要求把第二列同样按照排序的规则进行排序，这里该如何做呢？
 其实很简单，就是将每行数据拆分成多个字段，将这多个字段定义为map的一个key，也就是自定义key数据类型，该类型中包含要排序的这几列而已。  
