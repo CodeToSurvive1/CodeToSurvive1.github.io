@@ -140,7 +140,7 @@ public class SortMapper extends Mapper<LongWritable, Text, Text, Text> {
 
 2.编写reducer类  
 
-由于在map阶段和reduce阶段中存在shuffle阶段，而shuffle阶段中会包含partition分区，sort排序，combine合并(默认没有该操作，需要指定)等操作，因此到了reduce阶段后的数据会按照key进行了相关的合并操作，以便节省网络开销及本地磁盘的开销，因此到了reduce阶段后的数据也就变为了下面的格式:
+由于在map阶段和reduce阶段中存在shuffle阶段，而shuffle阶段中会包含partition分区，sort排序，，分组组合（group），combine合并(默认没有该操作，需要指定)等操作，因此到了reduce阶段后的数据会按照key进行了相关的合并操作，以便节省网络开销及本地磁盘的开销，因此到了reduce阶段后的数据也就变为了下面的格式:
 
 ```txt  
 angle------baby,
@@ -427,7 +427,7 @@ public class CustomDatatype implements WritableComparable<CustomDatatype> {
 
 ```
 
-2.自定义mapper类，mapper的输出的key设置为自定义数据类型CustomDatatype即可，而输出类型直接设置为空NullWritable就可以了，这样mapper输出到reducer阶段的时候会自动的进行分区，排序，combine合并(默认没有该操作，需要指定)等操作。  
+2.自定义mapper类，mapper的输出的key设置为自定义数据类型CustomDatatype即可，而输出类型直接设置为空NullWritable就可以了，这样mapper输出到reducer阶段的时候会自动的进行分区，排序，分组组合（group），combine合并(默认没有该操作，需要指定)等操作。  
 
 ```java
 package mac.cn.SecondSort.after;
