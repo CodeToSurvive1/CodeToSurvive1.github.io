@@ -55,8 +55,10 @@ tags: [大数据,hadoop]
 也就是说属性mapreduce.framework.name有三个取值，分别是local，classic，yarn.
 
 local本地模式，不会使用yarn集群来分配资源，直接在本地节点执行，在本地模式下执行的任务无法发挥集群的作用，而且执行的任务是不会在web ui中查看到的
+
 classic是针对mapreduce1而言，为了兼容老版本的mapreuce框架而定
-yarn集群管理模式，会通过YarnRunner与resourcemanager通信  
+
+yarn集群管理模式，会通过YarnRunner与resourcemanager通信   
 
 所以上面在加入该文件之前，没有显示指定mapreduce.framework.name，因此默认为local本地模式，这样任务是不会提交到集群中，所以本地肯定有map，rducer及runner的相关类文件。
 当加入该文件后，mapreduce.framework.name由默认的local本地模式改为yarn，运行后，hadoop框架需要将job提交到集群中，而集群中是不存在相关的map，reducer类的。  
@@ -82,3 +84,5 @@ file->project structure->artifacts->+->jar->from modules with dependiences
 job.setJar("/Users/mac/software/bigdataproject/out/artifacts/bigdata_jar/bigdata.jar");
 
 ```
+
+5.最后运行runner或者driver启动类，不会报错。
