@@ -1,6 +1,6 @@
 ---
 layout: "post"
-title: "如何设置没有reducer"
+title: "mapreduce程序如何设置没有reducer"
 date: "2016-10-24 19:05"
 tags: [大数据,hadoop]
 category: "hadoop"
