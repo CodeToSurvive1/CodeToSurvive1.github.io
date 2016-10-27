@@ -58,6 +58,36 @@ make start
 
 ```
 
+同时需要注意这里的mongo的volumes中的路径修改为自己用户下的新的文件夹下，以供docker使用  
+
+```xml
+
+mongo:
+  container_name: "reliable_mongo"
+  restart: always
+  image: mongo
+  volumes:
+    - /Users/mac/software/mongodb/data:/data/db
+    - /etc/localtime:/etc/localtime:ro
+    -
+```
+
+如果不改会报错
+
+```xml
+
+ERROR: for mongo  Cannot start service mongo: Mounts denied:
+The path /var/mongo/data/db
+is not shared from OS X and is not known to Docker.
+You can configure shared paths from Docker -> Preferences... -> File Sharing.
+See https://docs.docker.com/docker-for-mac/osxfs/#namespaces for more info.
+.
+ERROR: Encountered errors while bringing up the project.
+
+```
+
+
+
 
 可以安装docker GUI工具来kitematic查看docker中启动的容器,下载地址为[https://github.com/docker/kitematic/releases](https://github.com/docker/kitematic/releases)  
 
@@ -81,6 +111,36 @@ make start
 首页页面如下  
 
 ![首页页面](../assets/2016-10-24_11-04-41.png)
+
+可以通过下面指令添加管理员帐号：  
+
+docker exec -it reliable-master make adduser
+
+```xml
+
+./bin/reliable-master adduser
+
+*****************************************
+*  version 1.0.0 is outdate             *
+*  run: npm i -g reliable-master@1.0.6  *
+*****************************************
+
+
+ Do you want create an account? [Y/N]Y
+
+  User Id: root
+
+  Email address: lixiaojiao_hit@163.com
+
+  Password: qwer1234
+
+  isAdmin [Y/N]: Y
+
+  Add user success!
+
+  Goodbye! Have a great day!
+
+```
 
 ------
 
@@ -181,3 +241,9 @@ mac:reliable-macaca-docker-compose mac$ reliable server -m mac.cn:8083 --verbose
 ------
 
 自此，macaca的master，slave中CI持续集成框架搭建完毕。  
+
+
+
+------
+
+gitlab root/12345678
