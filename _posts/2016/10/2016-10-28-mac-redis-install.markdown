@@ -62,11 +62,12 @@ src/redis-server
 20791:M 28 Oct 12:34:56.786 * The server is now ready to accept connections on port 6379
 
 
- ```
+```
 
- 4.打开redis客户端测试
+ 4.打开redis客户端测试   
 
- ```xml
+
+```xml
 
  ./src/redis-cli
 
@@ -76,4 +77,4 @@ OK
 "wrold"
 127.0.0.1:6379>
 
- ```
+```
