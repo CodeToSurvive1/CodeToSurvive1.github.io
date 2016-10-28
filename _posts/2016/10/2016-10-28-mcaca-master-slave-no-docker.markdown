@@ -295,7 +295,12 @@ make server
 
 发现是英文版本，断掉服务修改文件    
 reliable-master/common/config.j文件中的   
-locale: 'en-US',为locale: 'zh-CN',   
+locale: 'en-US',为locale: 'zh-CN',  
+
+重新编译并启动
+
+make build
+make server 
 
 5.创建管理员用户   
 
