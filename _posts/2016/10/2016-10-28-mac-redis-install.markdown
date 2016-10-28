@@ -1,6 +1,6 @@
 ---
 layout: "post"
-title: "mac-redis-install"
+title: "mac安装redis"
 date: "2016-10-28 12:35"
 category: "other"
 tags: [NOSQL]
@@ -33,9 +33,10 @@ make
 
 3.启动reddis服务即可  
 
-```xml
+src/redis-server  
 
- src/redis-server
+```xml   
+
 
  20791:C 28 Oct 12:34:56.784 # Warning: no config file specified, using the default config. In order to specify a config file use src/redis-server /path/to/redis.conf
 20791:M 28 Oct 12:34:56.785 * Increased maximum number of open files to 10032 (it was originally set to 2560).
@@ -66,6 +67,7 @@ make
  4.打开redis客户端测试
 
  ```xml
+
  ./src/redis-cli
 
 127.0.0.1:6379> set 'hello' 'wrold'
