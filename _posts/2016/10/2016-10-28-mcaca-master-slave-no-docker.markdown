@@ -111,7 +111,8 @@ users
 ```   
 
 ------
-#### 配置redis  
+
+#### 配置redis    
 
 1.首先按照[安装教程](https://codetosurvive1.github.io/posts/mac-redis-install.html)进行安装   
 
