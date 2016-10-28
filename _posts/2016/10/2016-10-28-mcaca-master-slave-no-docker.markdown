@@ -299,8 +299,9 @@ locale: 'en-US',为locale: 'zh-CN',
 
 重新编译并启动
 
-make build
-make server 
+make build  
+
+make server
 
 5.创建管理员用户   
 
