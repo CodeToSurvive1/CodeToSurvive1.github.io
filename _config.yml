@@ -16,6 +16,7 @@ all_categories: [
 ["hive", "hive","/posts/hive.html"],
 ["flume", "flume","/posts/flume.html"],
 ["sqoop", "sqoop","/posts/sqoop.html"],
+["zookeeper", "sqoop","/posts/zookeeper.html"],
 ["macaca", "macaca","/posts/macaca.html"],
 ["read", "读书笔记","/posts/read.html"],
 ["other", "杂记","/posts/other.html"],
