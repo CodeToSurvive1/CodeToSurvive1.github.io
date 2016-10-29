@@ -2,7 +2,7 @@
 layout: "post"
 title: "nginx+flume+hadoop实战"
 date: "2016-10-29 09:03"
-category: "hadoop"
+category: ["hadoop","flume"]
 tags: [flume,hadoop]
 
 ---
