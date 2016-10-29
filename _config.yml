@@ -12,7 +12,8 @@ domain: CodeToSurvive1.github.io
 all_categories: [
 ["hadoop", "hadoop","/posts/hadoop.html"],
 ["spark", "spark","/posts/spark.html"],
-# ["web", "Web建站","/posts/web.html"],
+["hbase", "hbase","/posts/hbase.html"],
+["hive", "hive","/posts/hive.html"],
 ["macaca", "macaca","/posts/macaca.html"],
 ["read", "读书笔记","/posts/read.html"],
 ["other", "杂记","/posts/other.html"],
