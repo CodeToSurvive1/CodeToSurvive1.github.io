@@ -1,6 +1,6 @@
 ---
 layout: "post"
-title: "install-zookeeper"
+title: "zookeeper安装-单机版"
 date: "2016-10-29 15:46"
 category: ["zookeeper"]
 tags: [zookeeper,大数据]
