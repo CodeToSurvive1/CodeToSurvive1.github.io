@@ -216,7 +216,12 @@ xxx
 到此搭建完毕  		
 
 
-参考连接：
+总结：		
+
+其实仅连接远程的mysql并不能称之为“远程模式”，是否远程指的是metastore和hive服务是否在同一进程内。		
+
+
+参考连接：		
 
 [http://bi.dataguru.cn/thread-32711-1-1.html](http://bi.dataguru.cn/thread-32711-1-1.html)
 
