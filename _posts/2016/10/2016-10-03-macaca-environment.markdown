@@ -118,6 +118,7 @@ mac:~ mac$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Home
 
 ```xml
 brew install ios-webkit-debug-proxy
+brew install usbmuxd 
 ```
 
 * 安装IOS驱动
@@ -165,7 +166,7 @@ mac:~ mac$ macaca doctor
   ios: 1.0.37
 ```
 
-8.打开xcode->proferences找到下面的accounts,并登陆开发者账号
+8.运行脚本过程中报错或者inspector过程中报错，打开xcode->proferences找到下面的accounts,并登陆开发者账号
 
 ![登录开发者帐号](../assets/14755022998321.jpg)
 
