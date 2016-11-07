@@ -166,14 +166,98 @@ mac:~ mac$ macaca doctor
   ios: 1.0.37
 ```
 
-8.运行脚本过程中报错或者inspector过程中报错，打开xcode->proferences找到下面的accounts,并登陆开发者账号
+8.运行脚本过程中报错或者inspector过程中报错，打开xcode->proferences找到下面的accounts,并登陆开发者账号    
+
+比如，安装完app-inspector通过inspector查看后台报错  
+
+
+```xml
+
+插入ios真机设备，查看序列号
+
+idevice_id -l
+9daef85429600e88ea5442ba3d5fee548c02aeac
+
+启动inspector
+
+inspector -u 9daef85429600e88ea5442ba3d5fee548c02aeac --verbose
+>> request.js:24:12 [master] pid:3167 get remote update info failed.
+>> server.js:16:12 [master] pid:3167 server start with config:
+ { port: 5678,
+  verbose: true,
+  udid: '9daef85429600e88ea5442ba3d5fee548c02aeac',
+  ip: '192.168.31.164',
+  host: 'mac.local',
+  loaded_time: '2016-11-07 21:01:21' }
+>> app-inspector.js:42:10 [master] pid:3167 server start at: http://192.168.31.164:5678
+>> xctest-client.js:46:14 [master] pid:3167 project path: /usr/local/lib/node_modules/.app-inspector_npminstall/node_modules/.1.0.28@webdriveragent/WebDriverAgent/WebDriverAgent.xcodeproj
+>> xctest-client.js:215:12 [master] pid:3167 xcode version: 8.1
+>> WebDriverAgent version: 1.0.28
+>> xctest-client.js:160:14 [master] pid:3167 2016-11-07 21:01:24.258 xcodebuild[3174:78023]  IDETestOperationsObserverDebug: Writing diagnostic log for test session to:
+/Users/mac/Library/Developer/Xcode/DerivedData/WebDriverAgent-bigkcildozwtjqcpfxzovxskdqza/Logs/Test/79C8FCCF-B531-40EC-85B8-59D11FA5B4FA/Session-WebDriverAgentRunner-2016-11-07_210124-LVSTWc.log
+
+>> xctest-client.js:160:14 [master] pid:3167 2016-11-07 21:01:24.258 xcodebuild[3174:78017] [MT] IDETestOperationsObserverDebug: (168B0761-A302-4A92-908A-01BD523994ED) Beginning test session WebDriverAgentRunner-168B0761-A302-4A92-908A-01BD523994ED at 2016-11-07 21:01:24.257 with Xcode 8B62 on target <DVTiOSDevice: 0x7fbf64f26870> {
+    deviceSerialNumber:         FK2P1TWEG5QY
+    identifier:                 9daef85429600e88ea5442ba3d5fee548c02aeac
+    deviceClass:                iPhone
+    deviceName:                 李小蛟的 iPhone
+    deviceIdentifier:           9daef85429600e88ea5442ba3d5fee548c02aeac
+    productVersion:             10.1.1
+    buildVersion:               14B100
+    deviceSoftwareVersion:      10.1.1 (14B100)
+    deviceArchitecture:         arm64
+    deviceTotalCapacity:        58959704064
+    deviceAvailableCapacity:    44852158464
+    deviceIsTransient:          NO
+    ignored:                    NO
+    deviceIsBusy:               NO
+    deviceIsActivated:          YES
+    deviceActivationState:      Activated
+    deviceType:                 <DVTDeviceType:0x7fbf64bb3650 Xcode.DeviceType.iPhone>
+    supportedDeviceFamilies:    (
+    1
+)
+    applications:              (null)
+    provisioningProfiles:      (null)
+    activityProgress:          -2
+    activityTitle:             
+    hasInternalSupport:        NO
+    isSupportedOS:             YES
+    developerDiskMountError:   (null)
+(null)
+  } (10.1.1 (14B100))
+
+>> xctest-client.js:160:14 [master] pid:3167 2016-11-07 21:01:30.215 xcodebuild[3174:78017] Error Domain=IDETestOperationsObserverErrorDomain Code=3 "Test operation was canceled. If you believe this error represents a bug, please attach the log file at /Users/mac/Library/Developer/Xcode/DerivedData/WebDriverAgent-bigkcildozwtjqcpfxzovxskdqza/Logs/Test/79C8FCCF-B531-40EC-85B8-59D11FA5B4FA/Session-WebDriverAgentRunner-2016-11-07_210124-LVSTWc.log" UserInfo={NSLocalizedDescription=Test operation was canceled. If you believe this error represents a bug, please attach the log file at /Users/mac/Library/Developer/Xcode/DerivedData/WebDriverAgent-bigkcildozwtjqcpfxzovxskdqza/Logs/Test/79C8FCCF-B531-40EC-85B8-59D11FA5B4FA/Session-WebDriverAgentRunner-2016-11-07_210124-LVSTWc.log}
+
+>> xctest-client.js:160:14 [master] pid:3167 
+Testing failed:
+
+>> xctest-client.js:160:14 [master] pid:3167  Signing for "WebDriverAgentRunner" requires a development team. Select a development team in the project editor.
+  Code signing is required for product type 'UI Testing Bundle' in SDK 'iOS 10.1'
+** TEST FAILED **
+
+
+The following build commands failed:
+  Check dependencies
+(1 failure)
+
+>> xctest-client.js:168:14 [master] pid:3167 xctest client exit with code: 65, signal: null
+
+
+```
+
+![路径](../assets/2016/11/2016-11-07_21-05-39.png)
+
+可以看到上面的提示信息是需要选择开发帐号,路径也能在上面找到/usr/local/lib/node_modules/.app-inspector_npminstall/node_modules/.1.0.28@webdriveragent/WebDriverAgent/WebDriverAgent.xcodeproj       
+
+用xcode打开/usr/local/lib/node_modules/.app-inspector_npminstall/node_modules/.1.0.28@webdriveragent/WebDriverAgent/WebDriverAgent.xcodeproj，请对应上面的报错的日志中输出的路径打开,按照下面步骤进行修改,修改后再次运行命令即可     
 
 ![登录开发者帐号](../assets/14755022998321.jpg)
 
 ![下载所有证书](../assets/14755023121490.jpg)
 
 
-用xcode打开/usr/local/lib/node_modules/.app-inspector_npminstall/node_modules/.1.0.28@webdriveragent/WebDriverAgent/WebDriverAgent.xcodeproj
+
 
 ![选择证书](../assets/14755023314919.jpg)
 
@@ -185,6 +269,97 @@ mac:~ mac$ macaca doctor
 ![给runner选择team](../assets/14755023582886.jpg)
 
 ![修改bundle id](../assets/14755023656775.jpg)
+
+同样，进行脚本运行的时候也可能会出现错误，比如下面跑脚本报错,   
+
+```xml
+
+mac:changshutest mac$ macaca run -d js/weixin.js --verbose
+>> request.js:24:12 [master] pid:4046 get remote update info failed.
+>> index.js:17:12 [master] pid:4047 webdriver server start with config:
+ { port: 3456,
+  verbose: false,
+  always: true,
+  window: true,
+  ip: '192.168.31.164',
+  host: 'mac.local',
+  loaded_time: '2016-11-07 21:24:47' }
+>> middlewares.js:17:10 [master] pid:4047 base middlewares attached
+>> router.js:129:10 [master] pid:4047 router set
+>> webdriver sdk launched
+>> 
+
+>> 
+
+>>   macaca mobile sample
+
+>> responseHandler.js:11:12 [master] pid:4047 Recieve HTTP Request from Client: method: POST url: /wd/hub/session, jsonBody: {"desiredCapabilities":{"autoAcceptAlerts":true,"platformName":"iOS","platformVersion":"9.3.4","deviceName":"iPhone6 plus","udid":"9daef85429600e88ea5442ba3d5fee548c02aeac","bundleId":"com.tencent.xin"}}
+>> session.js:47:10 [master] pid:4047 Creating session, sessionId: 52c618f1-79c3-49bb-ac3d-ef78e3cb8581.
+>> xctest-client.js:46:14 [master] pid:4047 project path: /usr/local/lib/node_modules/.macaca-ios_npminstall/node_modules/.1.0.28@webdriveragent/WebDriverAgent/WebDriverAgent.xcodeproj
+>> macaca-ios.js:144:10 [master] pid:4047 {
+  "bundleId": "com.tencent.xin",
+  "platformName": "iOS",
+  "platformVersion": "9.3.4"
+}
+>> xctest-client.js:215:12 [master] pid:4047 xcode version: 8.1
+>> WebDriverAgent version: 1.0.28
+>> xctest-client.js:160:14 [master] pid:4047 2016-11-07 21:24:49.160 xcodebuild[4058:91967]  IDETestOperationsObserverDebug: Writing diagnostic log for test session to:
+/Users/mac/Library/Developer/Xcode/DerivedData/WebDriverAgent-bagqeermmcadmcctywbyvbqewyeo/Logs/Test/8AA0F0C9-B54C-4C20-AFB4-175215CAC0C1/Session-WebDriverAgentRunner-2016-11-07_212449-z5pAjR.log
+
+>> xctest-client.js:160:14 [master] pid:4047 2016-11-07 21:24:49.160 xcodebuild[4058:91966] [MT] IDETestOperationsObserverDebug: (D8B50A66-C013-4DE1-B715-2839FD6DF5D2) Beginning test session WebDriverAgentRunner-D8B50A66-C013-4DE1-B715-2839FD6DF5D2 at 2016-11-07 21:24:49.159 with Xcode 8B62 on target <DVTiOSDevice: 0x7fde1135db10> {
+    deviceSerialNumber:         FK2P1TWEG5QY
+    identifier:                 9daef85429600e88ea5442ba3d5fee548c02aeac
+    deviceClass:                iPhone
+    deviceName:                 李小蛟的 iPhone
+    deviceIdentifier:           9daef85429600e88ea5442ba3d5fee548c02aeac
+    productVersion:             10.1.1
+    buildVersion:               14B100
+    deviceSoftwareVersion:      10.1.1 (14B100)
+    deviceArchitecture:         arm64
+    deviceTotalCapacity:        58959704064
+    deviceAvailableCapacity:    44848533504
+    deviceIsTransient:          NO
+    ignored:                    NO
+    deviceIsBusy:               NO
+    deviceIsActivated:          YES
+    deviceActivationState:      Activated
+    deviceType:                 <DVTDeviceType:0x7fde10f31c10 Xcode.DeviceType.iPhone>
+    supportedDeviceFamilies:    (
+    1
+)
+    applications:              (null)
+    provisioningProfiles:      (null)
+    activityProgress:          -2
+    activityTitle:             
+    hasInternalSupport:        NO
+    isSupportedOS:             YES
+    developerDiskMountError:   (null)
+(null)
+  } (10.1.1 (14B100))
+
+>> xctest-client.js:160:14 [master] pid:4047 2016-11-07 21:24:51.911 xcodebuild[4058:91966] Error Domain=IDETestOperationsObserverErrorDomain Code=3 "Test operation was canceled. If you believe this error represents a bug, please attach the log file at /Users/mac/Library/Developer/Xcode/DerivedData/WebDriverAgent-bagqeermmcadmcctywbyvbqewyeo/Logs/Test/8AA0F0C9-B54C-4C20-AFB4-175215CAC0C1/Session-WebDriverAgentRunner-2016-11-07_212449-z5pAjR.log" UserInfo={NSLocalizedDescription=Test operation was canceled. If you believe this error represents a bug, please attach the log file at /Users/mac/Library/Developer/Xcode/DerivedData/WebDriverAgent-bagqeermmcadmcctywbyvbqewyeo/Logs/Test/8AA0F0C9-B54C-4C20-AFB4-175215CAC0C1/Session-WebDriverAgentRunner-2016-11-07_212449-z5pAjR.log}
+
+>> xctest-client.js:160:14 [master] pid:4047 
+Testing failed:
+
+>> xctest-client.js:160:14 [master] pid:4047  Signing for "WebDriverAgentRunner" requires a development team. Select a development team in the project editor.
+  Code signing is required for product type 'UI Testing Bundle' in SDK 'iOS 10.1'
+** TEST FAILED **
+
+
+The following build commands failed:
+  Check dependencies
+(1 failure)
+
+>> xctest-client.js:168:14 [master] pid:4047 xctest client exit with code: 65, signal: null
+
+``` 
+
+一样从上面找到   
+
+![](../assets/2016/11/2016-11-07_21-27-01.png)  
+
+同样按照上面的步骤进行操作，操作后再次运行即可   
 
 9.Product->build
 
