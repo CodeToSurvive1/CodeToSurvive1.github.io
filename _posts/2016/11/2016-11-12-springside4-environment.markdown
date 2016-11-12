@@ -216,28 +216,28 @@ tablePrefix: hadoop_
 ```xml
 
 <!-- 刷新开发环境数据库 -->
-		<profile>
-			<id>refresh-db</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-antrun-plugin</artifactId>
-						<configuration>
-							<target>
-								<property file="src/main/resources/application.development.properties" />
-								<property file="src/main/resources/application.properties" />
-								<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}" password="${jdbc.password}" onerror="continue" encoding="${project.build.sourceEncoding}">
-									<classpath refid="maven.test.classpath" />
-									<transaction src="src/main/resources/sql/h2/schema.sql" />
-									<transaction src="src/test/resources/data/h2/import-data.sql" />
-								</sql>
-							</target>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
+<profile>
+	<id>refresh-db</id>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<configuration>
+					<target>
+						<property file="src/main/resources/application.development.properties" />
+						<property file="src/main/resources/application.properties" />
+						<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}" password="${jdbc.password}" onerror="continue" encoding="${project.build.sourceEncoding}">
+							<classpath refid="maven.test.classpath" />
+							<transaction src="src/main/resources/sql/h2/schema.sql" />
+							<transaction src="src/test/resources/data/h2/import-data.sql" />
+						</sql>
+					</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</profile>
 
 ```
 
@@ -247,28 +247,28 @@ tablePrefix: hadoop_
 ```xml
 
 <!-- 刷新开发环境数据库 -->
-		<profile>
-			<id>refresh-db</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-antrun-plugin</artifactId>
-						<configuration>
-							<target>
-								<property file="src/main/resources/application.development.properties" />
-								<property file="src/main/resources/application.properties" />
-								<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}" password="${jdbc.password}" onerror="continue" encoding="${project.build.sourceEncoding}">
-									<classpath refid="maven.test.classpath" />
-									<transaction src="src/main/resources/sql/mysql/schema.sql" />
-									<transaction src="src/test/resources/data/h2/import-data.sql" />
-								</sql>
-							</target>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
+<profile>
+	<id>refresh-db</id>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<configuration>
+					<target>
+						<property file="src/main/resources/application.development.properties" />
+						<property file="src/main/resources/application.properties" />
+						<sql driver="${jdbc.driver}" url="${jdbc.url}" userid="${jdbc.username}" password="${jdbc.password}" onerror="continue" encoding="${project.build.sourceEncoding}">
+							<classpath refid="maven.test.classpath" />
+							<transaction src="src/main/resources/sql/mysql/schema.sql" />
+							<transaction src="src/test/resources/data/h2/import-data.sql" />
+						</sql>
+					</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</profile>
 
 ```
 
