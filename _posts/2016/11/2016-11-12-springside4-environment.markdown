@@ -66,6 +66,11 @@ Checking connectivity... done.
 
 ```xml
 
+如果使用本人的分支直接下载
+git clone https://github.com/CodeToSurvive1/springside4.git
+
+cd springside4
+
 pwd
 /Users/mac/software/github/springside4
 mac:springside4 mac$ ./quick-start.sh 
