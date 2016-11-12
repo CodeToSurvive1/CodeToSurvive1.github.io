@@ -14,20 +14,21 @@ tags: [springside4,j2ee]
 ```xml
 
 官方地址(https://github.com/springside/springside4)
+由于官方的https://github.com/springside/springside4目前的主分支是master，直接下载会报错，因此需要下载4.0分支，但是启动后查看quickstart仍然会报错，这里直接fork一个版本，在官方基础上进行改造。因此可以直接下载本人的分支,(https://github.com/CodeToSurvive1/springside4.git)，注意，本人已经将主分支切换到修复错误后的分支，可以直接clone即可		
 
-由于官方的https://github.com/springside/springside4目前的主分支是master，直接下载会报错，因此需要下载4.0分支，但是启动后查看quickstart仍然会报错，这里直接fork一个版本，在官方基础上进行改造。因此可以直接下载本人的分支,(https://github.com/CodeToSurvive1/springside4.git)，注意，本人已经将主分支切换到修复错误后的分支，可以直接clone即可  	 	
 
-```
+```	
 
-------
 
 ```xml
 
 下面会从官方中直接fork进行操作，如果直接使用本人的	[https://github.com/CodeToSurvive1/springside4.git](https://github.com/CodeToSurvive1/springside4.git)分支，请跳过下面(一，fork改造	)，直接进入（二，环境搭建）				 	
 
-```xml
+```xml	
 
-------
+
+------	
+
 
 ##### 一，fork改造	
 
