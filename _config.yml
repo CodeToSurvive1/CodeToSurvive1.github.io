@@ -18,6 +18,7 @@ all_categories: [
 ["sqoop", "sqoop","/posts/sqoop.html"],
 ["zookeeper", "zookeeper","/posts/zookeeper.html"],
 ["macaca", "macaca","/posts/macaca.html"],
+["j2ee", "j2ee","/posts/j2ee.html"],
 ["read", "读书笔记","/posts/read.html"],
 ["other", "杂记","/posts/other.html"],
 ["about", "关于","/about.html"]
