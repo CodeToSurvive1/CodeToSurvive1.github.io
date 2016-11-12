@@ -12,9 +12,9 @@ tags: [springside4,j2ee]
 
 ```xml
 
-官方地址[https://github.com/springside/springside4](https://github.com/springside/springside4)
+官方地址(https://github.com/springside/springside4)
 
-由于官方的https://github.com/springside/springside4目前的主分支是master，直接下载会报错，因此需要下载4.0分支，但是启动后查看quickstart仍然会报错，这里直接fork一个版本，在官方基础上进行改造。因此可以直接下载本人的分支,[hhttps://github.com/CodeToSurvive1/springside4.git](https://github.com/CodeToSurvive1/springside4.git)，注意，本人已经将主分支切换到修复错误后的分支，可以直接clone即可  	 	
+由于官方的https://github.com/springside/springside4目前的主分支是master，直接下载会报错，因此需要下载4.0分支，但是启动后查看quickstart仍然会报错，这里直接fork一个版本，在官方基础上进行改造。因此可以直接下载本人的分支,(https://github.com/CodeToSurvive1/springside4.git)，注意，本人已经将主分支切换到修复错误后的分支，可以直接clone即可  	 	
 
 ```
 
@@ -63,7 +63,7 @@ mac:springside4 mac$ ./quick-start.sh
 
 ```
 
-2.经过漫长的maven下载编译过程过后,会在后台启动服务，这时候直接访问url即可(如果maven下载缓慢，可以直接下载本人共享的maven的repository[](https://pan.baidu.com/s/1c2mktoO)),不过百度云盘也够慢的，自己选择吧		 	
+2.经过漫长的maven下载编译过程过后,会在后台启动服务，这时候直接访问url即可(如果maven下载缓慢，可以直接下载本人共享的maven的repository(https://pan.baidu.com/s/1c2mktoO),不过百度云盘也够慢的，自己选择吧		 	
 
 [http://localhost:8081/showcase/](http://localhost:8081/showcase/)  案例集合  	
 
@@ -93,7 +93,9 @@ mac:springside4 mac$ ./quick-start.sh
 5.再次启动命令，进入页面查看	
 
 首先干掉上次启动服务后的两个后台进程，否则报端口冲突 		
+
 ```xml
+
 ps -ef | grep jetty
   501  3466     1   0 10:51上午 ttys005    1:00.60 /Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/bin/java -classpath /Users/mac/software/apache-maven-3.3.9/boot/plexus-classworlds-2.5.2.jar -Dclassworlds.conf=/Users/mac/software/apache-maven-3.3.9/bin/m2.conf -Dmaven.home=/Users/mac/software/apache-maven-3.3.9 -Dmaven.multiModuleProjectDirectory=/Users/mac/software/github/springside4/examples/quickstart org.codehaus.plexus.classworlds.launcher.Launcher clean jetty:run
   501  3467     1   0 10:51上午 ttys005    1:29.03 /Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/bin/java -classpath /Users/mac/software/apache-maven-3.3.9/boot/plexus-classworlds-2.5.2.jar -Dclassworlds.conf=/Users/mac/software/apache-maven-3.3.9/bin/m2.conf -Dmaven.home=/Users/mac/software/apache-maven-3.3.9 -Dmaven.multiModuleProjectDirectory=/Users/mac/software/github/springside4/examples/showcase org.codehaus.plexus.classworlds.launcher.Launcher clean jetty:run -Djetty.port=8081
