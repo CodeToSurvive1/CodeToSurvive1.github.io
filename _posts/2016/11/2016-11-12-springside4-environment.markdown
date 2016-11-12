@@ -1,6 +1,6 @@
 ---
 layout: "post"
-title: "springside4"
+title: "springside4环境搭建 "
 date: "2016-11-02 08:18"
 category: "j2ee"
 tags: [springside4,j2ee]
@@ -19,6 +19,7 @@ tags: [springside4,j2ee]
 ```
 
 下面会从官方中直接fork进行操作，如果直接使用本人的	[https://github.com/CodeToSurvive1/springside4.git](https://github.com/CodeToSurvive1/springside4.git)分支，请跳过下面(一，fork改造	)，直接进入（二，环境搭建）		 	
+------
 
 ##### 一，fork改造	
 
@@ -47,6 +48,7 @@ Checking connectivity... done.
 
 ```
 
+------
 
 ##### 二，环境搭建	
 
@@ -122,6 +124,7 @@ mac:springside4 mac$ kill -9 3467
 
 ![成功页面](../assets/2016/11/2016-11-12_11-07-32.png)	
 
+------
 
 #### 三，使用springside4创建自己的maven工程,并配置为mysql数据库		  		
 
@@ -389,6 +392,11 @@ mac:bin mac$
 http://localhost:8080/login
 
 ![tomcat成功](../assets/2016/11/2016-11-12_11-49-56.png)
+
+
+------
+
+生成的hadoop_project地址可以通过[https://github.com/CodeToSurvive1/hadoop_project](https://github.com/CodeToSurvive1/hadoop_project)下载
 
 
 
