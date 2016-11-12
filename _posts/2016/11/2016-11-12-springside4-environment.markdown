@@ -8,7 +8,8 @@ tags: [springside4,j2ee]
 
 
 
-#### springside4环境搭建    
+#### springside4环境搭建    	
+
 
 ```xml
 
@@ -18,7 +19,14 @@ tags: [springside4,j2ee]
 
 ```
 
-下面会从官方中直接fork进行操作，如果直接使用本人的	[https://github.com/CodeToSurvive1/springside4.git](https://github.com/CodeToSurvive1/springside4.git)分支，请跳过下面(一，fork改造	)，直接进入（二，环境搭建）		 	
+------
+
+```xml
+
+下面会从官方中直接fork进行操作，如果直接使用本人的	[https://github.com/CodeToSurvive1/springside4.git](https://github.com/CodeToSurvive1/springside4.git)分支，请跳过下面(一，fork改造	)，直接进入（二，环境搭建）				 	
+
+```xml
+
 ------
 
 ##### 一，fork改造	
