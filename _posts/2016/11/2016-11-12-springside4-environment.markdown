@@ -412,7 +412,7 @@ http://localhost:8080/login
 
 ------
 
-生成的hadoop_project地址可以通过[https://github.com/CodeToSurvive1/hadoop_project](https://github.com/CodeToSurvive1/hadoop_project)下载
+生成的hadoop_project地址可以通过[https://github.com/CodeToSurvive1/hadoop_project/tree/v1.0](https://github.com/CodeToSurvive1/hadoop_project/tree/v1.0)下载
 
 
 
