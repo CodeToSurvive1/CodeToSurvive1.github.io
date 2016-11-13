@@ -1,7 +1,7 @@
 ---
 layout: "post"
 title: "springside4自定义项目配置 "
-date: "2016-11-02 08:18"
+date: "2016-11-13 15:18"
 category: "j2ee"
 tags: [springside4,j2ee]
 ---
