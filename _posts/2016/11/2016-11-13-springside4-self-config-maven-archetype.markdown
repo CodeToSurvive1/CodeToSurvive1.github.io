@@ -8,7 +8,7 @@ tags: [springside4,j2ee]
 
 
 
-#### springside4自定义项目配置
+#### springside4自定义项目配置		
 
 
 从上一篇文章[springside4环境搭建](https://codetosurvive1.github.io/posts/springside4-environment.html)中可以看出，通过./generate-project.sh生成项目后，还需要手工改page的代码，如果想配置mysql数据库，还需要自己改造pom文件及其相关的配置文件，很是麻烦，那么如何直接改springside4的模版引擎呢。这里springside4是使用了maven-archetype来作为模版引擎来生成代码的。
@@ -16,7 +16,7 @@ tags: [springside4,j2ee]
 
 1.进入到support目录下会看到maven的archetype，如下图所示 		
 
-![archetype](../assets/2016/11/2016-11-13_11-11-52.png)
+![archetype](../assets/2016/11/2016-11-13_11-11-52.png)	
 
 
 2.首先修改pom文件 		
@@ -338,7 +338,7 @@ chmod a+x ./bin/*
 
 然后在mysql数据库中添加项目名称的数据库,否则报错数据库找不到  	
 
-新建数据库后执行bin目录下的	
+新建数据库后执行bin目录下的		
 
 cd bin
 
