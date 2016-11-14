@@ -304,7 +304,7 @@ cd bin
 
 
 
-当然，上面修改的模版引擎已经提交到[https://github.com/CodeToSurvive1/springside4](https://github.com/CodeToSurvive1/springside4)的默认分支dev_4.0上，直接fork就不用修改了		
+当然，上面修改的模版引擎已经提交到[https://github.com/CodeToSurvive1/springside4/releases/tag/v1.1](https://github.com/CodeToSurvive1/springside4/releases/tag/v1.1)的默认分支dev_4.0上，直接fork就不用修改了		
 
 
 
