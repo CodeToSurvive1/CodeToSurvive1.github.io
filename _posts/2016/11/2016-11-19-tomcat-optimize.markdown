@@ -172,6 +172,8 @@ tomcat6,直接配置tomcat-users.xml文件
 
 3.连接器优化  		
 
+```xml
+
 enableLookups   是否查询远程访问ip的dns，默认为false		
 maxParameterCount	最大参数数量，get或者post的键值对个数，默认最大10000，多余的会被忽略.手动改为小于0则不限制 	
 maxPostSize		post请求时候FORM表单的最大字节数，默认2M，配置为小于0，则不限制 	
@@ -186,6 +188,8 @@ executor 		指定线程池
 maxConnections 		最大连接数 	
 maxThreads 		tomcat能够创建的最大线程数，默认200 	
 minSpareThreads 	保证最小空余线程数量 		
+
+```
 
 4.禁用ajp,因为一般都用nginx服务器直接返回静态文件 		
 
