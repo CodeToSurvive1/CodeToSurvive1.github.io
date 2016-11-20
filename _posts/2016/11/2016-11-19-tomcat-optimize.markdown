@@ -7,18 +7,19 @@ tags: [tomcat,j2ee]
 ---
 
 
-
-#### tomcat性能调优
-
-
-1. 修改connector的protocol模式 		
+1.修改connector的protocol模式 		
 
 对于不同版本的tomcat，该值也不同，比如		
 
-tomcat6，启动tomcat，测试下来发现默认是Http11Protocol：
+tomcat6，启动tomcat，测试下来发现默认是Http11Protocol：		
+
+```xml
+
 org.apache.coyote.http11.Http11Protocol - same as HTTP/1.1，阻塞式IO		
 org.apache.coyote.http11.Http11NioProtocol - non blocking Java connector，非阻塞IO 		
 org.apache.coyote.http11.Http11AprProtocol - the APR connector.		
+
+```
 
 启动tomcat6后查看后台日志，		
 
@@ -117,7 +118,8 @@ org.apache.coyote.http11.Http11AprProtocol - the APR/native connector.
 
 ```
 
-2. 修改线程池,默认是不用配置的，tomcat中有自己的内部设置，也可以通过server.xml手动指定 	 	   
+
+2.修改线程池,默认是不用配置的，tomcat中有自己的内部设置，也可以通过server.xml手动指定 	 	   
 
 首先通过配置tomcat的管理员界面，查看默认值  	
 
