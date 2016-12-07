@@ -1,3 +1,14 @@
+---
+layout: "post"
+title: "cdh环境搭建(一)环境准备"
+date: "2016-12-07 08:52"
+category: "hadoop"
+tags: [大数据,虚拟机,cdh,cloudera]
+
+---
+
+
+
 #### cdh环境搭建(一)环境准备
 
 ##### 环境准备  	
