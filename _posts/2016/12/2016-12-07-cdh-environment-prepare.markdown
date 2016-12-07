@@ -13,7 +13,7 @@ tags: [大数据,虚拟机,cdh,cloudera]
 
 ##### 环境准备  	
 
-1.下载系统自带的jdk 		
+1.卸载系统自带的jdk 		
 
 查询系统自带jdk		
 
@@ -75,7 +75,7 @@ passwd: all authentication tokens updated successfully.
 
 ```
 
-6.禁用ipv6  	
+4.禁用ipv6  	
 
 ```xml
 
@@ -96,7 +96,7 @@ alia ipv6 off
 
 ```
 
-7.关闭selinux  
+5.关闭selinux  
 
 ```xml
 
@@ -112,7 +112,7 @@ SELINUX=disabled
 
 ```
 
-8.修改用户打开最大进程数及最大文件句柄数   	
+6.修改用户打开最大进程数及最大文件句柄数   	
 
 首先查看系统的默认配置   	
 
@@ -159,11 +159,11 @@ vi /etc/security/limits.conf
 
 ```
    		
-9.修改sudoer(非必须)    
+7.修改sudoer(非必须)    
 
-10.修改主机名    
+8.修改主机名    
 
-11.修改主机名与ip映射关系 		
+9.修改主机名与ip映射关系 		
 
 
 ------
@@ -259,7 +259,9 @@ ntpdate        	0:off	1:off	2:off	3:off	4:off	5:off	6:off
 
 ```
 
-在centos2和centos3客户端中添加linux的contable定时任务来同步机器时间  	
+在centos2和centos3客户端中添加linux的contable定时任务来同步机器时间  		
+
+
 ```xml
 
  su
@@ -277,9 +279,11 @@ Password:
 
 ```
 
-直接测试下，同步时间效果,会报错，这是由于server启动后需要过几分钟才能在从节点上进行同步时间      		
+直接测试下，同步时间效果,会报错，这是由于server启动后需要过几分钟才能在从节点上进行同步时间		
 
-```xml
+
+
+```xml	
 
 [root@centos3 Desktop]# /usr/sbin/ntpdate 192.168.4.129
 
