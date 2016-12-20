@@ -1,7 +1,7 @@
 ---
 layout: "post"
 title: "cdh环境搭建(三)yum离线安装cdh"
-date: "2016-12-08 21:52"
+date: "2016-12-08 12:52"
 category: "hadoop"
 tags: [大数据,虚拟机,cdh,cloudera]
 
@@ -23,11 +23,11 @@ http://archive.cloudera.com/cdh5/parcels/5.3.6/CDH-5.3.6-1.cdh5.3.6.p0.11-el6.pa
 
 2.选择管理->设置
 
-![](../assets/2106/12/2016-12-18_19-25-33.png)
+![](../assets/2016/12/2016-12-18_19-25-33.png)
 
 ![](../assets/2016/12/2016-12-18_19-26-49.png)
 
-![](../assets/2106/12/2016-12-18_19-27-33.png)
+![](../assets/2016/12/2016-12-18_19-27-33.png)
 
 3.将1中下载的parcel文件放到目录下/opt/cloudera/parcel-repo 	 	
 
@@ -268,7 +268,7 @@ echo never > /sys/kernel/mm/redhat_transparent_hugepage/defrag
 
 ![](../assets/2016/12/2016-12-18_21-50-30.png)
 
-![](../assetss/2016/12/2016-12-18_21-54-08.png)
+![](../assets/2016/12/2016-12-18_21-54-08.png)
 
 注意这里的数据库主机名称端口前面要添加上主机地址，不然测试连接不通过  	
 记住密码gCn0ZFl3JD		

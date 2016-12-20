@@ -1,7 +1,7 @@
 ---
 layout: "post"
 title: "cdh环境搭建(二)yum离线安装cm"
-date: "2016-12-08 21:52"
+date: "2016-12-08 08:52"
 category: "hadoop"
 tags: [大数据,虚拟机,cdh,cloudera]
 
