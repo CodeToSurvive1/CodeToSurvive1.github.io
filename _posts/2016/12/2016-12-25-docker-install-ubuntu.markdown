@@ -8,7 +8,7 @@ tags: [大数据,虚拟机,docker]
 ---
 
 
-
+#### ubuntu安装docker
 
 1.更新系统源  	
 
@@ -44,7 +44,7 @@ gpg:               imported: 1  (RSA: 1)
 
 ```
 
-3.根据系统版本找到下面对应的链接,这里使用的是Ubuntu 16.04版本 		 	
+3.根据系统版本找到下面对应的链接,这里使用的是Ubuntu 16.04版本，也就是最后一个     		 	
 
 
 ```
@@ -182,7 +182,7 @@ c1e66fe1d26a        hello-world         "/hello"            2 minutes ago       
 ```
 
 
-####参考文档  		
+#### 参考文档  		
 
 
 [https://docs.docker.com/engine/installation/linux/ubuntulinux/](https://docs.docker.com/engine/installation/linux/ubuntulinux/)
