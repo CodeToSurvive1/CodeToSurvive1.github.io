@@ -2,7 +2,7 @@
 layout: "post"
 title: "ubuntu安装docker"
 date: "2016-12-25 12:52"
-category: "杂记"
+category: "other"
 tags: [大数据,虚拟机,docker]
 
 ---
