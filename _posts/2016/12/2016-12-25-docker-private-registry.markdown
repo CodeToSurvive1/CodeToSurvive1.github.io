@@ -199,6 +199,10 @@ Status: Downloaded newer image for 192.168.4.138:5000/nodepm2:latest
 ```
 
 
+注意：     
+
+想要从私有服务器中下载的话，私有服务器跟下载节点都需要配置上面的insecure-registries     
+  
 
 #### 参考文档   
 
