@@ -162,10 +162,10 @@ fa18e5ffd316: Pushed
 b6ca02dfe5e6: Pushed 
 latest: digest: sha256:002b64efd563616feb27f9ec41494a2329a3415af04f82536d3172f60cde4815 size: 2007
 
-```
+``` 
 
 
-9. 直接在自己的mac机器上测试下在192.168.4.138:5000搭建的是否成功    
+9.直接在自己的mac机器上测试下在192.168.4.138:5000搭建的是否成功    
 
 ```
 docker pull 192.168.4.138:5000/nodepm2
@@ -174,7 +174,7 @@ Error response from daemon: Get https://192.168.4.138:5000/v1/_ping: http: serve
 
 ```
 
-看来跟上面的错误是一样的，由于mac的配置跟centos配置不太一样，这里直接截图   
+看来跟上面的错误是一样的，由于mac的配置跟ubuntu配置不太一样，这里直接截图   
 
 ![](../assets/2016/12/2016-12-25_15-39-59.png)
 
