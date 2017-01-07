@@ -1,6 +1,6 @@
 ---
 layout: "post"
-title: "docker快速发布nodejs应用"
+title: "docker搭建jenkins"
 date: "2016-12-25 13:52"
 category: "other"
 tags: [大数据,虚拟机,docker]
