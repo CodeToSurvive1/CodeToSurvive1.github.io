@@ -120,16 +120,25 @@ test测试成功
 
 这样，到这一步之后其实就可以保存进行构建测试了，只是需要模拟真实的发布版本的情况，一般我们的手工操作如下：		
 
+
+```
+
 a.从svn或者git上下载源代码 		
 b.将本地代码打包，并排除不需要的文件，比如.git文件  		
 c.将打包好的程序包上传到远程服务器中  	
 d.停止远程服务器的服务，删除服务器上的代码，解压新的代码 	
-e.通过新的package来安装依赖，然后重启服务  	
+e.通过新的package来安装依赖，然后重启服务  
+
+```
 
 针对上面的步骤，我们需要做的指令如下  	
 
+```
+
 rm -rf /var/jenkins_home/workspace/docker_node.tar.gz
 tar -zcvf /var/jenkins_home/workspace/docker_node/docker_node.tar.gz -C /var/jenkins_home/workspace/docker_node . --exclude="*.git"
+
+```
 
 9.选择构建->execute shell		
 
@@ -137,7 +146,7 @@ tar -zcvf /var/jenkins_home/workspace/docker_node/docker_node.tar.gz -C /var/jen
 
 ![](../assets/2016/12/2016-12-26_19-51-05.png)
 
-将上面编写的删除打包好的压缩包及重新打包的代码粘贴到上面的地方  	
+将上面编写的删除打包好的压缩包及重新打包的代码粘贴到上面的地方 	 	
 
 ![](../assets/2016/12/2016-12-27_22-25-54.png)
 
