@@ -1,6 +1,6 @@
 ---
 layout: "post"
-title: "hadoop分布式环境搭建一(集群准备)"
+title: "hadoop分布式环境搭建二(集群搭建)"
 date: "2017-02-28 22:52"
 category: "hadoop"
 tags: [hadoop,分布式]
