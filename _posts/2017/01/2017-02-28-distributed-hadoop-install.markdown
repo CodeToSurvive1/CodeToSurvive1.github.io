@@ -654,4 +654,7 @@ iptables        0:关闭  1:关闭  2:关闭  3:关闭  4:关闭  5:关闭  6:�
 
 ```
 
-至此 hadoop集群环境搭建完毕.  
+至此 hadoop集群环境搭建完毕.    
+
+本文的配置文件相关路径为[https://github.com/CodeToSurvive1/bigdataproject/tree/master/src/main/resources/distribute/hadoop](https://github.com/CodeToSurvive1/bigdataproject/tree/master/src/main/resources/distribute/hadoop)
+
