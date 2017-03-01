@@ -191,9 +191,11 @@ cd /opt/modules/hadoop-2.5.0/etc/hadoop
 配置完成后就可以通过file->sftp/ftp->Browser file进行远程修改文件了  
 
 
-比如对centos1的文件进行修改  
+比如对centos1的文件进行修改     
 
-![](../assets/2017/02/2017-02-28_18-12-25.png)
+
+![修改信息](../assets/2017/02/2017-02-28_18-12-25.png)    
+
 
 6.主机角色分配   	
 
