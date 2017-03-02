@@ -11,7 +11,7 @@ tags: [hadoop,分布式]
 
 1.在/opt目录下创建software及modules文件夹，并修改到为mac用户下  
 
-```
+```bash
 
 sudo mkdir /opt/software
 [sudo] password for mac: 
@@ -45,7 +45,7 @@ hadoop-2.5.0.tar.gz                           100%  297MB  35.4MB/s   00:08
 
 进入centos1的/opt/software目录下查看是否上传成功 
 
-```
+```bash
 
 [mac@centos1 ~]$ ls -al /opt/software/
 总用量 443180
@@ -58,7 +58,7 @@ drwxr-xr-x. 5 root root      4096 2月  28 21:42 ..
 
 将jdk复制到centos2和centos3，hadoop软件临时不需要上传到centos2和centos3中，等最后配置文件全部配置好了之后再复制即可  
 
-```
+```bash
 mac:~ mac$ scp ~/Downloads/jdk-7u67-linux-x64.tar.gz  centos2:/opt/software
 mac@centos2's password: 
 jdk-7u67-linux-x64.tar.gz                     100%  136MB  45.2MB/s   00:03    
@@ -72,7 +72,7 @@ mac:~ mac$
 
 3.解压jdk并配置环境变量，该操作需要在三台电脑中都要进行配置   
 
-```
+```bash
 
 [mac@centos1 ~]$ tar -zxvf /opt/software/jdk-7u67-linux-x64.tar.gz -C /opt/modules/
 
@@ -81,7 +81,7 @@ mac:~ mac$
 
 配置环境变量  
 
-``` 
+```bash 
 
 vi ~/.bashrc 
 
@@ -89,7 +89,7 @@ vi ~/.bashrc
 
 添加下面内容 
 
-```
+```bash
 
 export JAVA_HOME=/opt/modules/jdk1.7.0_67
 export CLASS_PATH=$JAVA_HOME/lib
@@ -539,12 +539,29 @@ sudo chkconfig iptables off
 
 验证是否关闭成功  
 
-```
+```bash
 sudo chkconfig --list | grep iptables
 iptables        0:关闭  1:关闭  2:关闭  3:关闭  4:关闭  5:关闭  6:关闭
 ```
 
-18.启动wordcount程序测试下是否有问题  
+18.启动日志服务器    
+
+```bash
+
+./sbin/mr-jobhistory-daemon.sh start historyserver
+starting historyserver, logging to /opt/modules/hadoop-2.5.0/logs/mapred-mac-historyserver-centos3.out
+[mac@centos3 hadoop-2.5.0]$ jps
+2492 Jps
+2461 JobHistoryServer
+2226 SecondaryNameNode
+2126 DataNode
+2313 NodeManager
+
+
+```
+
+
+19.启动wordcount程序测试下是否有问题  
 
 首先上传一个文件到hdfs系统上  
 
