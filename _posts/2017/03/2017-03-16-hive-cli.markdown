@@ -1,0 +1,189 @@
+---
+layout: "post"
+title: "hive客户端"
+date: "2017-03-16 10:52"
+category: "hive"
+tags: [hive]
+
+---
+
+#### hive客户端说明      
+
+1.运行Hive CLI,过时了（缺乏多用户，安全及很多其他的特性），由hiveserver2的Beeline客户端代替    
+
+```
+$HIVE_HOME/bin/hive
+
+```
+
+2.hiveserver2的Beeline   
+
+```
+$HIVE_HOME/bin/hiveserver2
+
+```
+
+Beeline是通过hiveserver2的jdbc url开始，通过hiveserver2服务启动时候的地址+端口，默认情况下是localhost:10000,所以完整地址为jdbc:hive2://localhost:10000    
+
+```
+$HIVE_HOME/bin/beeline -u jdbc:hive2://localhost:10000
+```
+
+#### hive客户端使用  
+
+##### hive cli使用    
+
+```
+./bin/hive -help
+usage: hive
+ -d,--define <key=value>          Variable subsitution to apply to hive
+                                  commands. e.g. -d A=B or --define A=B
+    --database <databasename>     Specify the database to use
+ -e <quoted-query-string>         SQL from command line
+ -f <filename>                    SQL from files
+ -H,--help                        Print help information
+ -h <hostname>                    connecting to Hive Server on remote host
+    --hiveconf <property=value>   Use value for given property
+    --hivevar <key=value>         Variable subsitution to apply to hive
+                                  commands. e.g. --hivevar A=B
+ -i <filename>                    Initialization SQL file
+ -p <port>                        connecting to Hive Server on port number
+ -S,--silent                      Silent mode in interactive shell
+ -v,--verbose                     Verbose mode (echo executed SQL to the
+                                  console)
+
+```
+
+```
+比较重要的有：     
+hive -e '查询条件'  
+
+$HIVE_HOME/bin/hive -e 'select a.col from tab1 a'      
+
+hive -f '本地文件系统/hdfs文件系统中的sql脚本文件'   
+
+$HIVE_HOME/bin/hive -f /home/my/hive-script.sql
+$HIVE_HOME/bin/hive -f hdfs://<namenode>:<port>/hive-script.sql
+
+```
+
+```
+hive -i 进入交互式命令行之前先进行脚本初始化操作  
+$HIVE_HOME/bin/hive -i /home/my/hive-init.sql
+
+hive -S 安静模式下，通过查询导出数据到文件中  
+$HIVE_HOME/bin/hive -S -e 'select a.col from tab1 a' > a.txt
+
+hive --hiveconf(-hiveconf)设置配置参数 
+
+$HIVE_HOME/bin/hive -e 'select a.col from tab1 a' --hiveconf hive.exec.scratchdir=/home/my/hive_scratch  --hiveconf mapred.reduce.tasks=32
+
+修改日志等级及输出目标     
+$HIVE_HOME/bin/hive --hiveconf hive.root.logger=INFO,console（过时）
+$HIVE_HOME/bin/hiveserver2 --hiveconf hive.root.logger=INFO,console
+
+如果通过set命令设置hive.root.logger级别是不会生效的，因为命令启动的时候已经初始化了
+```
+
+hive交互式命令行  
+
+```
+quit/exit  退出命令行 
+reset   重置所有配置为默认配置
+set key=value   设置配置属性，如果拼错key，是不会报错的
+set 输出所有用户或者hive配置    
+set -v  输出所有的hadoop及hive配置
+add FILE[S] <filepath> <filepath>* 
+add JAR[S] <filepath> <filepath>* 
+add ARCHIVE[S] <filepath> <filepath>* 添加文件，jars或者archives到分布式文件缓存中
+list FILE[S] 
+list JAR[S] 
+list ARCHIVE[S] 显示所有缓存中的文件，jars或者archives
+delete FILE[S] <filepath>* 
+delete JAR[S] <filepath>* 
+delete ARCHIVE[S] <filepath>*删除文件 jars或者archives
+!command 在hive命令行中执行shell命令
+dfs dfs-command 执行hdfs命令
+source <filepath> 在hive命令行中执行脚本文件
+```
+
+hive resources  
+
+```
+hive可以在session期间管理额外的资源文件，并且在查询执行期间可以获取这些资源文件，资源可以是文件，jar文件以及archive文件，任何本地有效的文件都可以添加到session中 
+一旦资源加入到session中，hive查询可以在map/reduce/transform条件中通过名字进行引用，并且资源能够在整个hadoop集群中使用，hive使用hadoop的分布式文件缓存来存储资源以便整个集群在查询过程中都可用。
+FILE资源仅仅添加到分布式文件缓存系统中
+JAR文件还会添加到java的classpath中，这在udf使用对象的引用时候是必须的
+ARCHIVE文件会自动解压
+```
+
+##### Beeline   
+
+后续总结    
+
+
+#### 配置管理  
+
+1.hive默认从/conf/hive-default.xml文件中获取默认值     
+2.hive可以通过HIVE_CONF_DIR来配置变量    
+3.可以通过/conf/hive-site.xml文件来覆盖变量    
+4.log4j的配置放在/conf/hive-log4j.properties文件中  
+5.hive会默认从hadoop环境变量中继承过来   
+6.通过set命令或者hiveconf或者HIVE_OPTS来设置   
+
+
+#### hive元数据    
+
+元数据metadata存储在内嵌的derby数据库中，存储位置由hive的配置变量javax.jdo.option.ConnectionURL决定，默认情况下的位置是./metadata_db    
+
+使用内置的derby数据库一次最多有一个用户可以使用。当然可以配置derby为server模式，当然也可以配置其他数据库入mysql  
+
+hive中的表和分区的所有的元数据信息都可以通过hive metastore获取，metadata使用了JPOX的orm解决方案来实现持久化，因此任何支持该解决方案的数据库都可以支持hive，大多数的商业关系型数据库都支持     
+
+有两种hive的配置方式能够实现搭建metastore database和metastore server      
+
+metastore database配置分为本地和远程两种方式     
+
+```
+metastore database，元数据持久化的位置  
+    本地/内嵌元数据 数据库(derby)
+        javax.jdo.option.ConnectionURL:jdbc:derby:;databaseName=../build/test/junit_metastore_db;create=true 
+        javax.jdo.option.ConnectionDriverName:org.apache.derby.jdbc.EmbeddedDriver 
+        hive.metastore.warehouse.dir:file://${user.dir}/../build/ql/test/data/warehouse
+    远程 元数据 数据库
+        javax.jdo.option.ConnectionURL:jdbc:mysql://<host name>/<database name>?createDatabaseIfNotExist=true
+        javax.jdo.option.ConnectionDriverName:com.mysql.jdbc.Driver
+        javax.jdo.option.ConnectionUserName:<user name>
+        javax.jdo.option.ConnectionPassword:<password>
+
+```
+
+metastore server配置也分为本地和远程两种方式 
+
+```
+在本地或内嵌的metastore环境下，metastore server组件被当做是hive 客户端的一个组件，每个hive客户端都会打开一个数据库连接，然后执行sql查询操作。由于使用的是本地存储模式，所以确保执行sql的机器上能够方式数据库。当然也要确连接数据库的驱动已经配置在hive客户端的环境变零中了.
+
+默认情况下是本地模式，不需要进行任何设置 
+hive.metastore.uris:not needed because this is local store
+hive.metastore.local:true
+hive.metastore.warehouse.dir:hive的非外部表的存储位置 
+
+远程模式配置，这种模式下，所有的客户端连接到metastore服务端中，服务端进行元数据存储的查询操作。客户端与服务端通过thrift进行通信，可以通过下面命令启动服务端：
+
+hive --service metastore
+
+
+当然客户端也要进行相关的配置：
+
+hive.metastore.uris:thrift://centos1:9083
+hive.metastore.local:false 
+hive.metastore.warehouse.dir:/user/hive/warehouse
+配置完成后直接启动./bin/hive后就会链接到server端，然后执行sql相关命令即可 
+
+```
+
+具体配置可以参考链接： 
+
+[hive安装，内嵌模式及本地模式](https://codetosurvive1.github.io/posts/install-hive-basic.html)  
+[hive安装，远程模式](https://codetosurvive1.github.io/posts/install-hive-advanced.html)        
+
