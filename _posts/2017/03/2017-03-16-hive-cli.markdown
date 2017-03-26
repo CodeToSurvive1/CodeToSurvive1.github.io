@@ -21,6 +21,7 @@ $HIVE_HOME/bin/hive
 ```
 $HIVE_HOME/bin/hiveserver2
 
+或者$HIVE_HOME/bin/hive --service hiveserver2
 ```
 
 Beeline是通过hiveserver2的jdbc url开始，通过hiveserver2服务启动时候的地址+端口，默认情况下是localhost:10000,所以完整地址为jdbc:hive2://localhost:10000    
@@ -142,7 +143,7 @@ hive中的表和分区的所有的元数据信息都可以通过hive metastore�
 
 有两种hive的配置方式能够实现搭建metastore database和metastore server      
 
-metastore database配置分为本地和远程两种方式     
+metastore database配置分为本地和远程两种方式         
 
 ```
 metastore database，元数据持久化的位置  
@@ -158,7 +159,7 @@ metastore database，元数据持久化的位置
 
 ```
 
-metastore server配置也分为本地和远程两种方式 
+metastore server配置也分为本地和远程两种方式  
 
 ```
 在本地或内嵌的metastore环境下，metastore server组件被当做是hive 客户端的一个组件，每个hive客户端都会打开一个数据库连接，然后执行sql查询操作。由于使用的是本地存储模式，所以确保执行sql的机器上能够方式数据库。当然也要确连接数据库的驱动已经配置在hive客户端的环境变零中了.
@@ -182,8 +183,33 @@ hive.metastore.warehouse.dir:/user/hive/warehouse
 
 ```
 
-具体配置可以参考链接： 
+
+具体配置可以参考链接：     
 
 [hive安装，内嵌模式及本地模式](https://codetosurvive1.github.io/posts/install-hive-basic.html)  
+
 [hive安装，远程模式](https://codetosurvive1.github.io/posts/install-hive-advanced.html)        
 
+
+最后批注hiveserver2和metastore的区别：   
+
+```
+HiveServer2和MetaStore本质上都是Thrift Service，虽然可以启动在同一个进程内，但不建议这么做。
+建议是拆成不同的服务进程来启动
+具体可以看代码，看看 HiveServer2到底启动了些什么： https://www.codatlas.com/github.com/apache/hive/master/service/src/java/org/apache/hive/service/server/HiveServer2.java?line=112
+ 
+一般来讲，我们认为HiveServer2是用来提交查询的，也就是用来访问数据的。
+而MetaStore才是用来访问元数据的。
+如果你把两者混了，起在同一个进程内，就会产生你的问题类的疑问。
+ 
+CliDriver是SQL本地直接编译，然后访问MetaStore，提交作业，是重客户端。
+BeeLine是把SQL提交给HiveServer2，由HiveServer2编译，然后访问MetaStore，提交作业，是轻客户端。
+ 
+具体写业务脚本两种都行，数据量大的话，建议用CliDriver
+
+```
+
+参考地址：
+[http://wenda.chinahadoop.cn/question/4489](http://wenda.chinahadoop.cn/question/4489)  
+
+[https://community.mapr.com/thread/8519](https://community.mapr.com/thread/8519)
