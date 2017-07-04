@@ -248,4 +248,12 @@ mysql>update user set host='%' where user='root' and host='localhost';
 Query OK, 1 row affected (0.00 sec)
 Rows matched: 1  Changed: 1  Warnings: 0
 
-```
+最后不要忘记重启mysql 
+
+sudo service mysql restart
+
+``` 
+
+ 
+
+
