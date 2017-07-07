@@ -15,3 +15,13 @@ RMI或Hessian
 [dubbo](http://dubbo.io/Developer+Guide-zh.htm)
 
 [高性能mysql](http://blog.csdn.net/bingjing12345/article/details/72877888)
+
+[redis中文](http://www.redis.cn/topics/pipelining.html)
+
+[Diruptor](http://www.cnblogs.com/haiq/p/4112689.html)
+
+[CountDownLatch](http://www.importnew.com/15731.html)
+
+[springcloud](http://cloud.spring.io/spring-cloud-static/Camden.SR4/#_spring_cloud_netflix)
+
+[翟永超的springcloud](http://blog.didispace.com/spring-cloud-starter-dalston-2-2/)
