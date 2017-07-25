@@ -26,7 +26,13 @@ RMI或Hessian
 
 [翟永超的springcloud](http://blog.didispace.com/spring-cloud-starter-dalston-2-2/)
 
+[事务管理](http://www.cnblogs.com/duanxz/p/4661288.html)
+
+[mycat](http://www.mycat.io/)
+
+[datax](https://github.com/alibaba/DataX)
 
 Wireshark 
 
 图解HTTP/HTTP权威指南 
+
