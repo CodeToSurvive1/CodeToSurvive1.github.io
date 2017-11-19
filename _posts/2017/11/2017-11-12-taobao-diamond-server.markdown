@@ -32,7 +32,7 @@ D.  可以看到远程分支上总共存在四个分支，本地默认分支是b
         意思是切换到远程分支origin/master，并在本地起名为master
 
 E.  可以通过git branch查看是否本地已经切换到master分支
- 
+
 ```
 
 2.新建数据库并创建表结构  
@@ -83,7 +83,7 @@ db.poolPreparedStatements=true
 ```
 abc=123
 root=root
-``` 
+```
 
 修改/Users/mac/software/github/diamond/pom.xml文件中的mysql驱动版本，否则会在后面6处报错  
 
@@ -99,7 +99,7 @@ root=root
 
 ```
 
-mvn clean package -DskipTests 
+mvn clean package -DskipTests
 
 ```
 
@@ -124,4 +124,3 @@ mvn clean package -DskipTests
 ```
 Request processing failed; nested exception is com.taobao.diamond.server.exception.ConfigServiceException: org.springframework.jdbc.BadSqlGrammarException: PreparedStatementCallback; bad SQL grammar [insert into config_info (data_id,group_id,content,md5,gmt_create,gmt_modified) values(?,?,?,?,?,?)]; nested exception is com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'OPTION SQL_SELECT_LIMIT=DEFAULT' at line 1
 ```
- 

@@ -1,6 +1,6 @@
 ---
 layout: "post"
-title: "diamond-server环境搭建"
+title: "rocketmq环境搭建"
 date: "2017-11-12 12:00"
 category: "j2ee"
 tags: [j2ee,javaweb]
@@ -20,7 +20,7 @@ mvn -Prelease-all -DskipTests clean install -U
 cd distribution/target/apache-rocketmq
 ```
 
-2.启动rocketmq 
+2.启动rocketmq
 
 ```
 
@@ -51,7 +51,7 @@ mvn install -DskipTests
 cd /Users/mac/software/flaginfo/software/rocketmq/rocketmq-externals/rocketmq-console/target
 
 NAMESRV_ADDR=localhost:9876 java -jar rocketmq-console-ng-1.0.0.jar   
- 
+
 ```
 
 4.访问localhost:8080即可查看管理控制rocketmq  
